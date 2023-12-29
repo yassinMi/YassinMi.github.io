@@ -46,8 +46,9 @@ font-size: var(--title-size);
  margin-top: 8px;
  min-height: 30px;/*to avoid animation shifting the whole page when text changes*/
 background-color: transparent;
-overflow-wrap: anywhere;
+overflow-wrap: break-word;
 word-wrap: break-word;
+width:0;min-width:100%;/*this forces the title from expanding it's parent and page width when it gets more text content*/
 }
 @keyframes c_blink {
     0% { border-bottom:1px solid rgb(219, 219, 219); }
@@ -96,6 +97,7 @@ word-wrap: break-word;
     flex-direction: column;
     align-items: stretch;
     margin: 24px;
+    overflow: hidden;
 }
 .intro>*{
     
