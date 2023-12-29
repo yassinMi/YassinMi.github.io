@@ -530,6 +530,11 @@ box-shadow: 0 0 14px rgba(241, 241, 241, 0.205);
 
   /*mobile  */
 @media only screen and (max-width: 767px) {
+    :root{
+     
+        --timeline-to-content :-2px;
+    }
+    
     .experiences-wrapper{
         margin-top: 16px;
         display: grid;
@@ -591,5 +596,8 @@ box-shadow: 0 0 14px rgba(241, 241, 241, 0.205);
         top: -25px;
         left: 50px;
         width: 200px;
+    }
+    .project-item:nth-child(even){
+        background-color: initial;
     }
   }
