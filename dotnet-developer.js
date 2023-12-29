@@ -264,7 +264,7 @@ async function start(){
     currentText = {cursorPos:0,errorDecorators:[],text:`ÿþB€j¤íÈ¥] ${errors[0]}`};
 title.innerHTML = renderRichText(currentText);
 await moveCursor(title,1,50);
-await moveCursorAndRandomize(title,30,10000);
+await moveCursorAndRandomize(title,30,10);
 await moveCursorAndRandomize(title,35,30);
 await moveCursorAndRandomize(title,37,100);
 await delay(500,0)
