@@ -534,13 +534,8 @@ box-shadow: 0 0 14px rgba(241, 241, 241, 0.205);
      
         --timeline-to-content :-2px;
     }
-    
     .experiences-wrapper{
-        margin-top: 16px;
-        display: grid;
         grid-template-columns: repeat(1, minmax(0, 1fr));
-        background-color: rgba(255, 255, 0, 0);
-        gap: 16px;
         align-items: center;
     }
     .experience-card{
@@ -549,40 +544,18 @@ box-shadow: 0 0 14px rgba(241, 241, 241, 0.205);
         justify-content: center;
         place-self: center;
     }
-    
     .links-wrapper{
-        display: grid;
-        margin: 0;
-        margin-top: 8px;
         grid-template-columns: repeat(1, minmax(0, 1fr));
     }
 
     .project-item{
-        position: relative;
-        display: flex;
         flex-direction: column;
-        margin-left: -8px;
-        padding: 8px;
-        border: 1px 0 0 0 solid rgb(68, 68, 68);
-        background-color: transparent;
-    
-        /*the following section is used in conjunction with .show class to trigger animation when scrolling*/
-        opacity: 0;
-        transform-origin: bottom;
-        transform: perspective(1000px) rotateX(30deg) translateZ(0px) scale(0.9);
-        transition: opacity 1s ease-in-out, transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-    
     }
     .project-images{
-        justify-self: flex-end;
         max-width: 240px;
         min-width: 40px;
-        /*background-color: rgba(255, 255, 255, 0.11);*/
-        border-radius: 12px;
         align-self: center;
-        margin-left: 24px;
-        position: relative;
-        text-align: center;
+        margin-top: 24px;
         margin-bottom: 16px;
     }
     .img4{
