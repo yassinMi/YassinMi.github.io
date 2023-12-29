@@ -159,8 +159,6 @@ a.link:visited{
     min-width: 340px;
     background-color: rgba(255, 255, 0, 0);
     margin-left: 24px;
-    flex-shrink: 0;
-    flex-grow: 50%
 }
 .right-part{
     flex-grow: 1;
@@ -207,7 +205,15 @@ a.link:visited{
     justify-content: center;
     align-content: center;
     font-weight: bold;
+    transition: all 1s ease-in-out;
 
+}
+.skill:hover{
+    box-shadow: 0 0 11px hsla(162, 74%, 53%, 0.302);
+    background-color: #2fe0ab56;
+    border-color: #2fe0abab;
+    color: #72f5cd;
+    transition: all 0.1s ease-in-out;
 }
 .skill0{
     box-shadow: 0 0 11px hsla(162, 74%, 53%, 0.302);
