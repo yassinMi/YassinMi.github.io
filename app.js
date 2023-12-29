@@ -8,16 +8,18 @@ for(var i=0; i<elems.length;i++){
     console.log(elem);
     elem.setst
     if(elem.classList.contains("skill0")){
-        startStrong(elem,0.85,1,0.8);
+        startCsAnimation(elem,0.85,1,0.8);
     }
     else if(elem.classList.contains("skill1")){
-        startStrong(elem,0.125,0.8,0.6);
+        startCsAnimation(elem,0.125,0.8,0.6);
     }
     else{
-        startStrong(elem,0.45,0.9,0.6);
+        startCsAnimation(elem,0.45,0.9,0.6);
     }
 }
-
+/**
+ * obsolete (using css animation with a random delay)
+ */
 function startStrong(elem,freq,max,min){
     var time = Math.random()*100;
     var period = 1/freq;
@@ -29,10 +31,33 @@ function startStrong(elem,freq,max,min){
 
     }, 16);
 }
+/**
+ * @param {HTMLElement} elem 
+ */
+function reset_animation(elem) {
+    elem.style.animation = 'none';
+    elem.offsetHeight; 
+    elem.style.animation = null; 
+  }
+/**
+ * @param {HTMLElement} elem 
+ */
+ function startCsAnimation(elem,freq,max,min){
+    var period = 1/freq;
+    var time = Math.random()* period;
+
+    brightness = (((Math.cos(-time*freq*2*Math.PI)+1)/2)*(max-min))+min;
+    elem.style.opacity=brightness
+    setTimeout(() => {
+        reset_animation(elem);
+    }, time*1000);
+        
+
+}
 document.addEventListener('keydown', hndlKeyDown);
 /**
  * 
- * @param {KeyboardEvent} ev 
+ * @param  {KeyboardEvent} ev 
  */
 function hndlKeyDown(ev){
     if(string.length &&( ev.key===';'||ev.key==='Enter')){
@@ -74,6 +99,15 @@ document.addEventListener('DOMContentLoaded', function () {
     for (let i = 0; i < cardElems.length; i++) {
         const elem = cardElems.item(i);
         observer.observe(elem);
-
+    }
+    const projectElems = document.getElementsByClassName('project-item');
+    for (let i = 0; i < projectElems.length; i++) {
+        const elem = projectElems.item(i);
+        observer.observe(elem);
+    }
+    const linkElems = document.getElementsByClassName('link');
+    for (let i = 0; i < linkElems.length; i++) {
+        const elem = linkElems.item(i);
+        observer.observe(elem);
     }
   });

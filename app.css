@@ -118,6 +118,16 @@ background-color: transparent;
     padding: 16px;
     border-radius:  500px ;
     cursor: pointer;
+
+    /*the following section is used in conjunction with .show class to trigger animation when scrolling*/
+    opacity: 0;
+    transform-origin: bottom;
+    transform: perspective(1000px) rotateY(30deg) translateZ(30px) scale(0.9);
+    transition: opacity 0.3s ease-in-out, transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.link.show {/*used to trigger fade in when scrolling*/
+    opacity: 1;
+    transform: rotateY(0deg);
 }
 a.link{
 
@@ -189,6 +199,11 @@ a.link:visited{
   flex-wrap: wrap;
   margin-top: 16px;
 }
+
+@keyframes sinBrightness{
+    100%,0% {opacity:   var(--max-sin-bringhtness);}
+    50% {opacity: var(--min-sin-bringhtness);}
+}
 .skill{
     padding: 8px;
     margin: 4px;
@@ -197,64 +212,66 @@ a.link:visited{
     text-overflow: ellipsis;
     border-radius: 5px;
     border-width: 1px;
-    background-color: #2fe0ab2c;
-    border-color: #2fe0ab28;
-    color: #72f5ceb2;
+    background-color: hsla(var(--chip-hue), 74%, 53%, 0.173);
+    border-color: hsla(var(--chip-hue), 74%, 53%, 0.157);
+    color: hsla(var(--chip-hue), 87%, 70%, 0.698);
     font-family: 'Fira Code', monospace;
 
     justify-content: center;
     align-content: center;
     font-weight: bold;
-    transition: all 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    box-shadow: 0 0 var(--shadow-extent) hsla(var(--chip-hue), 74%, 53%, var(--aplha));
+    --aplha:0.302;
+    --shadow-extent:0px;
+    --chip-hue : 162;
+    --sinBrightness-period :2.2222s;
+    --max-sin-bringhtness:0.9;
+    --min-sin-bringhtness:0.6;
+    --sinBrightness-delay: 0s;
+    animation:  sinBrightness calc(1 * var(--sinBrightness-period)) cubic-bezier(0.37, 0, 0.63, 1) var(--sinBrightness-delay) infinite ;
 
 }
 .skill:hover{
-    box-shadow: 0 0 11px hsla(162, 74%, 53%, 0.302);
-    background-color: #2fe0ab56;
-    border-color: #2fe0abab;
-    color: #72f5cd;
-    transition: all 0.1s ease-in-out;
+    background-color: hsla(var(--chip-hue), 74%, 53%, 0.337);
+    border-color: hsla(var(--chip-hue), 74%, 53%, 0.671);
+    color: hsl(var(--chip-hue), 87%, 70%);
+    transition: opacity 1s ease-in-out;
+    --aplha:0.302;
+    --shadow-extent:11px;
+    opacity: 1;
+    animation: none;
 }
 .skill0{
-    box-shadow: 0 0 11px hsla(162, 74%, 53%, 0.302);
-    background-color: #2fe0ab56;
-    border-color: #2fe0abab;
-    color: #72f5cd;
+    --sinBrightness-period :1.176s;
+
+    --max-sin-bringhtness:1;
+    --min-sin-bringhtness:0.8;
+
+    --shadow-extent:11px;
+    background-color: hsla(var(--chip-hue), 74%, 53%, 0.337);
+    border-color: hsla(var(--chip-hue), 74%, 53%, 0.671);
+    color: hsl(var(--chip-hue), 87%, 70%);
+    
 }
 .skill1{
+    --sinBrightness-period :8s;
+
+    --max-sin-bringhtness:0.8;
+    --min-sin-bringhtness:0.6;
     opacity: 60%;
 }
 
 .skill.language{
-    background-color: hsla(106, 74%, 53%, 0.173);
-    border-color: hsla(106, 74%, 53%, 0.157);
-    color: hsla(106, 87%, 70%, 0.698);
+    --chip-hue : 106;
     font-family: 'Fira Code', monospace;
 }
-.skill0.language{
-    box-shadow: 0 0 11px hsla(106, 74%, 53%, 0.302);
-    background-color: hsla(106, 74%, 53%, 0.337);
-    border-color: hsla(106, 74%, 53%, 0.671);
-    color: hsl(106, 87%, 70%);
-}
-.skill1.language{
-    opacity: 60%;
-}
+
 .skill.lang{
-    background-color: hsla(323, 74%, 53%, 0.173);
-    border-color: hsla(323, 74%, 53%, 0.157);
-    color: hsla(323, 87%, 70%, 0.698);
+    --chip-hue : 323;
     font-family: 'Fira Code', monospace;
 }
-.skill0.lang{
-    box-shadow: 0 0 11px hsla(323, 74%, 53%, 0.302);
-    background-color: hsla(323, 74%, 53%, 0.337);
-    border-color: hsla(323, 74%, 53%, 0.671);
-    color: hsl(323, 87%, 70%);
-}
-.skill1.lang{
-    opacity: 60%;
-}
+
 .timeline{
 }
 
@@ -266,6 +283,17 @@ a.link:visited{
     padding: 8px;
     border: 1px 0 0 0 solid rgb(68, 68, 68);
     background-color: transparent;
+
+    /*the following section is used in conjunction with .show class to trigger animation when scrolling*/
+    opacity: 0;
+    transform-origin: bottom;
+    transform: perspective(1000px) rotateX(30deg) translateZ(0px) scale(0.9);
+    transition: opacity 1s ease-in-out, transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+}
+.project-item.show {/*used to trigger fade in when scrolling*/
+    opacity: 1;
+    transform: rotateX(0deg);
 }
 .project-content{
     display: flex;
@@ -491,7 +519,7 @@ box-shadow: 0 0 14px rgba(241, 241, 241, 0.205);
     border-radius: 100%;
     display: block;
 }
-.show {
+.experience-card.show {
     opacity: 1;
     transform: rotateX(0deg);
   }
