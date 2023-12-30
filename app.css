@@ -588,3 +588,7 @@ box-shadow: 0 0 14px rgba(241, 241, 241, 0.205);
         transition-delay: 0s; 
     }
   }
+
+  @media (prefers-reduced-motion) {
+    /*todo reduce animations*/
+  }
