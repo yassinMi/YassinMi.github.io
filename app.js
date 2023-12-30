@@ -60,6 +60,7 @@ document.addEventListener('keydown', hndlKeyDown);
  * @param  {KeyboardEvent} ev 
  */
 function hndlKeyDown(ev){
+    if(ev.getModifierState('Control')) return;
     if(string.length &&( ev.key===';'||ev.key==='Enter')){
        var newSkill = lastSkill.cloneNode(true);
        lastSkill.classList.remove("end");
