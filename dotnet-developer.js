@@ -214,94 +214,89 @@ async function start(){
             currentText = {text:"Dotnet Developer",cursorPos:16,errorDecorators:[]}
             title.innerHTML = renderRichText(currentText);
             await delay(3000,0);
-
         } 
         currentText = {text:"Dotnet Developer",cursorPos:16,errorDecorators:[]}
 
         isFirstTime=false;
     
+        title.innerHTML = renderRichText(currentText);
+        await moveCursor(title,6);
+        await delay(330)
+        await backslashWithCursor(title,6)
+        await delay(120)
+        await writeWithCursor(title,"Software")
+        await delay(2000);
+        await moveCursor(title,18);
+        await delay(1000);
+        await writeWithCursor(title,";")
+        await delay(800);
 
-    title.innerHTML = renderRichText(currentText);
-    await moveCursor(title,6);
-    await delay(330)
-    await backslashWithCursor(title,6)
-    await delay(120)
-    await writeWithCursor(title,"Software")
-    await delay(2000);
-    await moveCursor(title,18);
-    await delay(1000);
-    await writeWithCursor(title,";")
-    await delay(800);
+        title.classList.add("code")
+        await delay(100);
 
-    title.classList.add("code")
-    await delay(100);
+        currentText.errorDecorators.push({start:0,end:8,type:"Error"})
+        title.innerHTML = renderRichText(currentText);
+        await delay(1000);
+        await moveCursor(title,8,60);
+        await backslashWithCursor(title,2,300)
+        await backslashWithCursor(title,6,60)
+        await writeWithCursor(title,"var",400)
+        await delay(1);
+        title.innerHTML = "<span class='keyword' >var<c>&nbsp;</c></span>Developer;"
+        await delay(3500);
+        title.innerHTML = `<span class='keyword' >var<c>&nbsp;</c></span>Developer; <span class='inline-error show'>${errors[0]}</span>`
+        await delay(300);
+        title.innerHTML = `<span class='keyword' >v@<c>&nbsp;</c></span> Developer; <span class='inline-error show'>${errors[0]}</span>`
+        await delay(300);
 
-    currentText.errorDecorators.push({start:0,end:8,type:"Error"})
-    title.innerHTML = renderRichText(currentText);
-    await delay(1000);
-    await moveCursor(title,8,60);
-    await backslashWithCursor(title,2,300)
-    await backslashWithCursor(title,6,60)
-    await writeWithCursor(title,"var",400)
-    await delay(1);
-    title.innerHTML = "<span class='keyword' >var<c>&nbsp;</c></span>Developer;"
-    await delay(3500);
-    title.innerHTML = `<span class='keyword' >var<c>&nbsp;</c></span>Developer; <span class='inline-error show'>${errors[0]}</span>`
-    await delay(300);
-    title.innerHTML = `<span class='keyword' >v@<c>&nbsp;</c></span> Developer; <span class='inline-error show'>${errors[0]}</span>`
-    await delay(300);
+        title.innerHTML = `<span class='keyword' >ÿ<c>@</c>r</span> DþBeloperB  <span class='inline-error show'>${errors[0]}</span>`
+        await delay(300);
 
-    title.innerHTML = `<span class='keyword' >ÿ<c>@</c>r</span> DþBeloperB  <span class='inline-error show'>${errors[0]}</span>`
-    await delay(300);
+        title.innerHTML = `<span class='keyword' ><c>ÿ</c>þB€j¤íÈ¥]</span> ${errors[0]}`
+        await delay(300);
 
-    title.innerHTML = `<span class='keyword' ><c>ÿ</c>þB€j¤íÈ¥]</span> ${errors[0]}`
-    await delay(300);
+        title.innerHTML = `<span class='keyword' ><c>ÿ</c>þB€j¤íÈ¥]</span> ${errors[0]}`
+        await delay(100);
+        title.innerHTML = `<span><c>ÿ</c>þB€j¤íÈ¥]</span> ${errors[0]}`
+        await delay(100);
+        currentText = {cursorPos:0,errorDecorators:[],text:`ÿþB€j¤íÈ¥] ${errors[0]}`};
+        title.innerHTML = renderRichText(currentText);
+        await moveCursor(title,1,50);
+        await moveCursorAndRandomize(title,30,10);
+        await moveCursorAndRandomize(title,35,30);
+        await moveCursorAndRandomize(title,37,100);
+        await delay(500,0)
+        //await backslashWithCursor(title,500,0);
+        clearWithCursor();
+        //title.classList.remove("code")
+        await delay(1000);
 
-    title.innerHTML = `<span class='keyword' ><c>ÿ</c>þB€j¤íÈ¥]</span> ${errors[0]}`
-    await delay(100);
-    title.innerHTML = `<span><c>ÿ</c>þB€j¤íÈ¥]</span> ${errors[0]}`
-    await delay(100);
-    currentText = {cursorPos:0,errorDecorators:[],text:`ÿþB€j¤íÈ¥] ${errors[0]}`};
-title.innerHTML = renderRichText(currentText);
-await moveCursor(title,1,50);
-await moveCursorAndRandomize(title,30,10);
-await moveCursorAndRandomize(title,35,30);
-await moveCursorAndRandomize(title,37,100);
-await delay(500,0)
-//await backslashWithCursor(title,500,0);
-clearWithCursor();
-    //title.classList.remove("code")
-    await delay(1000);
+        currentText = {cursorPos:1,errorDecorators:[],text:"U"};
+        title.innerHTML = renderRichText(currentText);
+        await writeWithCursor(title,"I/UX Designer",230);
 
-    currentText = {cursorPos:1,errorDecorators:[],text:"U"};
-title.innerHTML = renderRichText(currentText);
-await writeWithCursor(title,"I/UX Designer",230);
+        await delay(10000);
+        await backslashWithCursor(title,16,80);
+        await delay(500,0)
+        await writeWithCursor(title, "C# Developer")
 
+        await delay(3000,0);
+        await backslashWithCursor(title,16,50);
+        await delay(500,0)
+        await writeWithCursor(title, "WPF Developer")
 
+        await delay(3000,0);
+        await backslashWithCursor(title,16,50);
+        await delay(500,0)
+        await writeWithCursor(title, "Typescript Developer")
 
+        await delay(3000,0);
+        await backslashWithCursor(title,24,50);
+        await delay(500,0)
+        await writeWithCursor(title, "Dotnet Developer")
+        await delay(3000,0);
 
-    await delay(10000);
-    await backslashWithCursor(title,16,80);
-    await delay(500,0)
-    await writeWithCursor(title, "C# Developer")
-
-    await delay(3000,0);
-    await backslashWithCursor(title,16,50);
-    await delay(500,0)
-    await writeWithCursor(title, "WPF Developer")
-
-    await delay(3000,0);
-    await backslashWithCursor(title,16,50);
-    await delay(500,0)
-    await writeWithCursor(title, "Typescript Developer")
-
-    await delay(3000,0);
-    await backslashWithCursor(title,24,50);
-    await delay(500,0)
-    await writeWithCursor(title, "Dotnet Developer")
-    await delay(3000,0);
-
-}
+    }
 
 }
 
