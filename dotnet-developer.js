@@ -9,6 +9,8 @@
  */
 var currentText = {text:"Dotnet Developer",cursorPos:0,errorDecorators:[]}
 var random = "ÿþB0€j¤íÈ¥Ð-]j‰A5ãLQ¦°ÉÉ]!¡ÍŠZxKÊR6MÜê¬0|uÀ0‰Äœ¨¡W§ÒS¡ôuÒÛB!ÍDøÑÔð§þþÐ¾r€ÿö8”ó”ÛcGvÝu“ªÑÝÙzÏ¾LwP#œþÌsQ5çq†Ú£¹%jÖÈ°B"
+var encriptedSet="~\`!@#$%^&*()-_=+[{]}\|;:\'\",<.>/?0123456789ABCDEF"
+var encriptedSet2="aBcDeFgHiJkLmNpQrStUvWxYz0123456789!@$%^&*()_+[]{}|;:',.<>?/~`"
 var errors = ["CS0818: Implicitly typed locals must be initialized"]
 /**
  * extend or shrink decorators as neccesarry after a character deletion or insertion
@@ -181,13 +183,17 @@ async function backslashWithCursor(elem,times,speed){
     var pos = currentText.cursorPos
     if(pos==-1) pos = currentText.text.length-1;
    
+    if(speed==0) {
+        currentText.cursorPos = to;
+        elem.innerHTML = renderRichText(currentText);
+        return
+    }
     var inc = pos>to? -1: 1;
     while(pos!=to){
         await delay(speed)
         pos = pos+inc;
         currentText.cursorPos = pos;
         elem.innerHTML = renderRichText(currentText);
-   
     }
    }
 /**
@@ -202,15 +208,47 @@ function clearWithCursor(){
     currentText = {cursorPos:0,errorDecorators:[],text:""}
     title.innerHTML = renderRichText(currentText)
 }
+function RandInt(a, b) {
+    return Math.floor(Math.random() * (b - a + 1)) + a;
+  }
+/**
+ * 
+ * @param {HTMLHeadingElement} elem 
+ */
+async function  encryptDecrypt(elem,time){
+    let initialStr = currentText.text;
+    let encryptedStr = currentText.text;
+    //# encrypt
+    var indexes = Array.from({length:initialStr.length},(v,k)=>k);
+    while(indexes.length){
+
+        let ix = indexes.splice( RandInt(0,indexes.length-1),1)[0]
+        encryptedStr = alterCharAtIndex(encryptedStr,ix, encriptedSet[RandInt(0,encriptedSet.length-1)] )
+        currentText.text = encryptedStr;
+        elem.innerHTML = renderRichText(currentText);
+        await delay(time);
+    }
+
+    indexes = Array.from({length:initialStr.length},(v,k)=>k);
+    while(indexes.length){
+
+        let ix = indexes.splice( RandInt(0,indexes.length-1),1)[0]
+        encryptedStr = alterCharAtIndex(encryptedStr,ix, initialStr[ix] )
+        currentText.text = encryptedStr;
+        elem.innerHTML = renderRichText(currentText)
+        await delay(time);
+    }
+}
 
 async function start(){
     var dec = 120;
+    var reducedMotionCodePath = window.matchMedia("(preferes-reduced-motion: reduce)").matches
     var isFirstTime=true;
     var strr = "yassi io"
     console.log(alterCharAtIndex(strr,0,"9"))
     while (true) {
         if(isFirstTime){
-            await delay(1500,0);
+            //await delay(1500,0);
             currentText = {text:"Dotnet Developer",cursorPos:16,errorDecorators:[]}
             title.innerHTML = renderRichText(currentText);
             await delay(3000,0);
@@ -226,49 +264,71 @@ async function start(){
         await delay(120)
         await writeWithCursor(title,"Software")
         await delay(2000);
-        await moveCursor(title,18);
+        await moveCursor(title,18,0);
         await delay(1000);
         await writeWithCursor(title,";")
         await delay(800);
 
-        title.classList.add("code")
         await delay(100);
-
+ 
+        
         currentText.errorDecorators.push({start:0,end:8,type:"Error"})
         title.innerHTML = renderRichText(currentText);
         await delay(1000);
-        await moveCursor(title,8,60);
-        await backslashWithCursor(title,2,300)
-        await backslashWithCursor(title,6,60)
-        await writeWithCursor(title,"var",400)
-        await delay(1);
-        title.innerHTML = "<span class='keyword' >var<c>&nbsp;</c></span>Developer;"
-        await delay(3500);
-        title.innerHTML = `<span class='keyword' >var<c>&nbsp;</c></span>Developer; <span class='inline-error show'>${errors[0]}</span>`
-        await delay(300);
-        title.innerHTML = `<span class='keyword' >v@<c>&nbsp;</c></span> Developer; <span class='inline-error show'>${errors[0]}</span>`
-        await delay(300);
+        if(reducedMotionCodePath){
+            await backslashWithCursor(title,20,300)
+            
+        }
+        if(!reducedMotionCodePath){
+            await moveCursor(title,8,60);
+            await backslashWithCursor(title,2,300)
+            await backslashWithCursor(title,6,60)
+            await writeWithCursor(title,"var",400)
+            await delay(1);
+            title.innerHTML = "<span class='keyword' >var<c>&nbsp;</c></span>Developer;"
+            await delay(3500);
+            title.innerHTML = `<span class='keyword' >var<c>&nbsp;</c></span>Developer; <span class='inline-error show'>${errors[0]}</span>`
+            await delay(300);
+            
+            if(Math.random()>0.99){
+                title.innerHTML = `<span class='keyword' >v@<c>&nbsp;</c></span> Developer; <span class='inline-error show'>${errors[0]}</span>`
+                await delay(300);
+    
+                title.innerHTML = `<span class='keyword' >ÿ<c>@</c>r</span> DþBeloperB  <span class='inline-error show'>${errors[0]}</span>`
+                await delay(300);
+    
+                title.innerHTML = `<span class='keyword' ><c>ÿ</c>þB€j¤íÈ¥]</span> ${errors[0]}`
+                await delay(300);
+    
+                title.innerHTML = `<span class='keyword' ><c>ÿ</c>þB€j¤íÈ¥]</span> ${errors[0]}`
+                await delay(100);
+                title.innerHTML = `<span><c>ÿ</c>þB€j¤íÈ¥]</span> ${errors[0]}`
+                await delay(100);
+                currentText = {cursorPos:0,errorDecorators:[],text:`ÿþB€j¤íÈ¥] ${errors[0]}`};
+                title.innerHTML = renderRichText(currentText);
+                await moveCursor(title,1,50);
+                await moveCursorAndRandomize(title,30,10);
+                await moveCursorAndRandomize(title,35,30);
+                await moveCursorAndRandomize(title,37,100);
+                await delay(500,0)
+            }
+            else{
+                currentText = {cursorPos:0,errorDecorators:[],text:`var Developer ${errors[0]}`};
+                title.innerHTML = renderRichText(currentText);
+                await delay(800);
+                await encryptDecrypt(title,10);
+                await delay(800);
+                
+                //await encryptDecrypt(title,10);
+                //await delay(800);
 
-        title.innerHTML = `<span class='keyword' >ÿ<c>@</c>r</span> DþBeloperB  <span class='inline-error show'>${errors[0]}</span>`
-        await delay(300);
-
-        title.innerHTML = `<span class='keyword' ><c>ÿ</c>þB€j¤íÈ¥]</span> ${errors[0]}`
-        await delay(300);
-
-        title.innerHTML = `<span class='keyword' ><c>ÿ</c>þB€j¤íÈ¥]</span> ${errors[0]}`
-        await delay(100);
-        title.innerHTML = `<span><c>ÿ</c>þB€j¤íÈ¥]</span> ${errors[0]}`
-        await delay(100);
-        currentText = {cursorPos:0,errorDecorators:[],text:`ÿþB€j¤íÈ¥] ${errors[0]}`};
-        title.innerHTML = renderRichText(currentText);
-        await moveCursor(title,1,50);
-        await moveCursorAndRandomize(title,30,10);
-        await moveCursorAndRandomize(title,35,30);
-        await moveCursorAndRandomize(title,37,100);
-        await delay(500,0)
-        //await backslashWithCursor(title,500,0);
-        clearWithCursor();
-        //title.classList.remove("code")
+            }
+           
+            //await backslashWithCursor(title,500,0);
+            clearWithCursor();
+            //title.classList.remove("code")
+        }
+        
         await delay(1000);
 
         currentText = {cursorPos:1,errorDecorators:[],text:"U"};
