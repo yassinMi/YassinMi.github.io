@@ -299,7 +299,7 @@ async function start(){
             title.innerHTML = `<span class='keyword' >var<c>&nbsp;</c></span>Developer; <span class='inline-error show'>${errors[0]}</span>`
             await delay(300);
             
-            if(Math.random()>0.99){
+            if(Math.random()>0.50){
                 title.innerHTML = `<span class='keyword' >v@<c>&nbsp;</c></span> Developer; <span class='inline-error show'>${errors[0]}</span>`
                 await delay(300);
     
@@ -324,7 +324,7 @@ async function start(){
             else{
                 currentText = {cursorPos:0,errorDecorators:[],text:`var Developer ${errors[0]}`};
                 title.innerHTML = renderRichText(currentText);
-                await delay(800);
+                await delay(1300);
                 await encryptDecrypt(title,10);
                 await delay(800);
                 
@@ -342,7 +342,7 @@ async function start(){
 
         currentText = {cursorPos:1,errorDecorators:[],text:"U"};
         title.innerHTML = renderRichText(currentText);
-        await writeWithCursor(title,"I/UX Designer",230);
+        await writeWithCursor(title,"I/UX Designer",190);
 
         await delay(10000);
         await backslashWithCursor(title,16,80);
