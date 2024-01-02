@@ -339,6 +339,21 @@ height: auto;
 width: 200px;
 box-shadow: 0 0 14px rgba(241, 241, 241, 0.205);
 }
+.img1-v2-1{
+    margin-left: -20px;
+    margin-top: 60px;
+    width: 250px;
+    transform: perspective(1000px) rotateY(-20deg) translateZ(-50px); 
+    box-shadow: 0 0 8px rgba(241, 241, 241, 0.452);
+}
+.img1-v2-2{
+    position: absolute;
+    top: 54px;
+    left: 85px;
+    width: 120px;
+    transform: perspective(1000px) rotateY(-20deg) translateZ(-50px); 
+    box-shadow: 0 0 8px rgba(241, 241, 241, 0.452);
+}
 .img2{
     margin-left: -20px;
     margin-top: 60px;
