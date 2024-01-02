@@ -9,7 +9,7 @@
  */
 var currentText = {text:"Dotnet Developer",cursorPos:0,errorDecorators:[]}
 var random = "ÿþB0€j¤íÈ¥Ð-]j‰A5ãLQ¦°ÉÉ]!¡ÍŠZxKÊR6MÜê¬0|uÀ0‰Äœ¨¡W§ÒS¡ôuÒÛB!ÍDøÑÔð§þþÐ¾r€ÿö8”ó”ÛcGvÝu“ªÑÝÙzÏ¾LwP#œþÌsQ5çq†Ú£¹%jÖÈ°B"
-var encriptedSet="~\`!@#$%^&*()-_=+[{]}\|;:\'\",<.>/?0123456789ABCDEF"
+var encriptedSet="~!@#$%^&*()-_=+[{]}\|;:,<.>/?0123456789ABCDEF"
 var encriptedSet2="aBcDeFgHiJkLmNpQrStUvWxYz0123456789!@$%^&*()_+[]{}|;:',.<>?/~`"
 var errors = ["CS0818: Implicitly typed locals must be initialized"]
 /**
@@ -55,6 +55,13 @@ function applyDecoratorsToInerHtml(rt, innerHtmlBeforeDecorators){
     return res.replace(/\b(Typescript)|(Dotnet)\b/,(r,n)=>`<span class='keyword'>${r}</span>`)
     return res;
 }
+function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;")
+              .replace(/"/g, "&quot;")
+              .replace(/'/g, "&#39;");
+}
 /**
  * @returns {string}
  * @param {RichText} rt 
@@ -62,11 +69,11 @@ function applyDecoratorsToInerHtml(rt, innerHtmlBeforeDecorators){
 function renderRichText(rt){
     if(!rt.text.length) return "";
     var initStr = rt.text;
-    if(rt.cursorPos==-1) return applyDecoratorsToInerHtml(rt,initStr) ;
-    if(rt.cursorPos>initStr.length) return applyDecoratorsToInerHtml(rt,initStr) ;
-    if(rt.cursorPos==initStr.length) return  applyDecoratorsToInerHtml(rt,initStr + "<c>&nbsp;</c>")  
-   var res =    initStr.slice(0,rt.cursorPos)+"<c>"+initStr[rt.cursorPos]+"</c>" +
-   ( initStr.length>rt.cursorPos+1? initStr.slice(rt.cursorPos+1) : "");
+    if(rt.cursorPos==-1) return applyDecoratorsToInerHtml(rt,escapeHtml(initStr)) ;
+    if(rt.cursorPos>initStr.length) return applyDecoratorsToInerHtml(rt,escapeHtml(initStr)) ;
+    if(rt.cursorPos==initStr.length) return  applyDecoratorsToInerHtml(rt,escapeHtml(initStr) + "<c>&nbsp;</c>")  
+   var res =    escapeHtml(initStr.slice(0,rt.cursorPos))+"<c>"+escapeHtml( initStr[rt.cursorPos])+"</c>" +
+   ( initStr.length>rt.cursorPos+1? escapeHtml(initStr.slice(rt.cursorPos+1)) : "");
    res = res.replace(/ /g,"&nbsp;")
    res = applyDecoratorsToInerHtml(rt,res);
    return res;
@@ -223,6 +230,7 @@ async function  encryptDecrypt(elem,time){
     while(indexes.length){
 
         let ix = indexes.splice( RandInt(0,indexes.length-1),1)[0]
+        if(initialStr[ix]===' ')continue; //keep white spaes for mobile layout reasons
         encryptedStr = alterCharAtIndex(encryptedStr,ix, encriptedSet[RandInt(0,encriptedSet.length-1)] )
         currentText.text = encryptedStr;
         elem.innerHTML = renderRichText(currentText);
@@ -233,6 +241,7 @@ async function  encryptDecrypt(elem,time){
     while(indexes.length){
 
         let ix = indexes.splice( RandInt(0,indexes.length-1),1)[0]
+        if(initialStr[ix]===' ')continue;
         encryptedStr = alterCharAtIndex(encryptedStr,ix, initialStr[ix] )
         currentText.text = encryptedStr;
         elem.innerHTML = renderRichText(currentText)
