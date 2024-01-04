@@ -1,4 +1,5 @@
 :root{
+    --primary-hue : 162;
     --tag-green-font: rgb(113, 224, 113);
     --tag-green-bg: rgba(113, 224, 113, 0.178);
     /*--tag-purple-font:hsl(271, 79%, 74%);*/
@@ -198,7 +199,7 @@ a.link:visited{
 }
 .section-header::before{
     content: "# ";/*▁ ▂  ▃*/
-    color: hsl(162, 87%, 70%);
+    color: hsl(var(--primary-hue), 87%, 70%);
     /*font-family: 'Fira Code', monospace;*/
 
 
