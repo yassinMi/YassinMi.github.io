@@ -29,6 +29,7 @@ html, body{
 }
 #main{
     align-self: center;
+    width: 100%;
     max-width: 900px;
     min-height: 100%;
     margin: 0;
@@ -386,6 +387,18 @@ box-shadow: 0 0 14px rgba(241, 241, 241, 0.205);
     
     /*box-shadow: 0 0 6px rgba(241, 241, 241, 0.219);*/
 }
+img{
+    border: 1px solid transparent;
+    transition: transform 1s;
+    cursor: pointer;
+}
+.im:hover{
+    box-shadow: 0 0 8px rgb(63, 223, 191);
+    border: 1px solid rgb(63, 223, 191);
+    transform: none;
+    
+}
+
 .project-item:nth-child(even){
     background-color: rgba(114, 114, 114, 0.089);
 }
@@ -551,9 +564,91 @@ box-shadow: 0 0 14px rgba(241, 241, 241, 0.205);
   }
 
 
+.large-image-view{
+    background-color: rgba(0, 0, 0, 0.329);
+    backdrop-filter: blur(2px);
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    display: none;
+    flex-direction: row;
+    place-content: center;
+    align-content: center;
+}
 
+.large-image-view.open{
+    display: flex;
+}
 
+.large-image-wrapper{
+    align-self: center;
+    background-color: rgba(102, 51, 153, 0.425);
+    position: relative;
+    height: fit-content;
+    width: fit-content;
+    max-height: calc(100vh - 96px);
+    max-width:  calc(100vw - 96px);
+    margin: 0;
 
+    /*before .show is activated*/
+    opacity: 0.5;
+    transform-origin: bottom;
+    transform: perspective(1000px) rotateX(30deg) translateZ(0px) scale(0.9);
+    transition: opacity 0.3s ease-in-out, transform 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
+    
+}
+.large-image-wrapper.show {/*used to trigger fade in*/
+    opacity: 1;
+    transform: rotateX(0deg);
+}
+.img-clone.exp-enlarged{
+    position: initial;
+    transform: none;
+    max-height: calc(100vh - 96px);
+    max-width: calc(100vw - 96px);
+    height: auto;
+    width: auto;
+    margin: 0;
+}
+.image-viewer-button{
+    background-color: rgb(37, 37, 37);
+    height: 32px;
+    width: 32px;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 0 8px 1px hsla(0, 0%, 100%,10%);
+    position: absolute;
+    border:  1px solid rgba(255, 255, 255, 0.712);
+    cursor: pointer;
+    opacity: 0.8;
+    color: rgb(189, 189, 189);
+    transition: all 0.2s;
+}
+.image-viewer-button:hover{
+    opacity: 1;
+}
+.image-viewer-button>svg{
+    transition: all 0.2s;
+    height: 16px;
+    width: 16px;
+}
+.image-viewer-button:hover>svg{
+    height: 20px;
+    width: 20px;
+}
+.close-large-image-button{
+    right: -0px;
+    top: -40px;
+}
+.open-image-in-new-tab-button{
+    right: 40px;
+    top: -40px;
+}
 
   /*mobile  */
 @media only screen and (max-width: 767px) {
@@ -633,4 +728,15 @@ box-shadow: 0 0 14px rgba(241, 241, 241, 0.205);
 
   @media (prefers-reduced-motion) {
     /*todo reduce animations*/
+    .large-image-wrapper{
+         /*before .show is activated*/
+        opacity: 0.5;
+        transform-origin: bottom;
+        transform: none;
+        transition: opacity 0.3s ease-in-out;
+    }
+    .large-image-wrapper.show {/*used to trigger fade in*/
+        opacity: 1;
+        transform: rotateX(0deg);
+    }
   }

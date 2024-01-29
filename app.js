@@ -2,6 +2,80 @@ var elems = document.getElementsByClassName("skill")
 var string = "UI/UX"
 var skillsWrapper = document.getElementById("skills-wrapper");
 var lastSkill = document.getElementsByClassName("skill end").item(0);
+/**
+ * @type {HTMLCollectionOf<HTMLImageElement>}
+ */
+var images = document.getElementsByClassName("im");
+var isLargeImageViewOpen = false;
+/**
+ * @type {HTMLDivElement}
+ */
+var largImageView = document.getElementsByClassName("large-image-view").item(0)
+//# images enlarging feature (experimental)
+window.addEventListener("keydown",(ev)=>{
+    if(ev.key=="Escape"){
+        if(isLargeImageViewOpen){
+            closeLargeImageView()
+        }
+    }
+})
+function closeLargeImageView(){
+    largImageView.classList.remove("open")
+    largImageView.innerHTML=""
+    isLargeImageViewOpen=false;
+}
+largImageView.onclick=(ev)=>{
+   closeLargeImageView();
+}
+for (let i = 0; i < images.length; i++) {
+    const img = images.item(i);
+    console.log("registered events for img")
+    
+    img.addEventListener("click",ev=>{
+        isLargeImageViewOpen = true;
+
+        largImageView.classList.add("open")
+        /**
+         * @type {HTMLImageElement}
+         */
+        let imgClone = img.cloneNode()
+        imgClone.classList.remove("im")
+        imgClone.classList.add("img-clone")
+        imgClone.classList.add("exp-enlarged")
+        imgClone.addEventListener("click",ev=>{
+            ev.stopPropagation()
+        })
+        
+
+        let largImgWrapper = document.createElement("div")
+        largImgWrapper.className="large-image-wrapper"
+        largImgWrapper.appendChild(imgClone)
+        largImageView.appendChild(largImgWrapper)
+        let closeLargeImageButton = document.createElement("div")
+        closeLargeImageButton.className="image-viewer-button close-large-image-button"
+        closeLargeImageButton.addEventListener("click",()=>{
+            closeLargeImageView();
+        })
+        closeLargeImageButton.innerHTML='<svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/> </svg>'
+        let openImageInNewTabButton = document.createElement("div")
+        openImageInNewTabButton.className="image-viewer-button open-image-in-new-tab-button"
+        openImageInNewTabButton.addEventListener("click",()=>{
+            window.open(img.src, "_blank");
+        })
+        openImageInNewTabButton.innerHTML='<svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/></svg>'
+        largImgWrapper.appendChild(openImageInNewTabButton)
+        largImgWrapper.appendChild(closeLargeImageButton)
+        setTimeout(()=>{
+            largImgWrapper.classList.add("show")
+
+        })
+
+        console.log("mouseenter")
+        img.classList.add("exp-enlarged")
+    })
+    
+}
+//# endof images enlarging feature (experimental)
 
 for(var i=0; i<elems.length;i++){
     const elem = elems.item(i);
