@@ -337,6 +337,11 @@ a.link:visited{
 height: auto;
     z-index: 2; */  
 }
+.im{
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 .img1{
 width: 200px;
 box-shadow: 0 0 14px rgba(241, 241, 241, 0.205);
