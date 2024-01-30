@@ -394,13 +394,15 @@ box-shadow: 0 0 14px rgba(241, 241, 241, 0.205);
 }
 img{
     border: 1px solid transparent;
-    transition: transform 1s;
+    transition: transform 1s, box-shadow 1s, border 1s;
     cursor: pointer;
 }
 .im:hover{
     box-shadow: 0 0 8px rgb(63, 223, 191);
     border: 1px solid rgb(63, 223, 191);
     transform: none;
+    transition: transform 1s, box-shadow 0.05s, border 0.05s;
+
     
 }
 
