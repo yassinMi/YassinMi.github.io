@@ -491,7 +491,7 @@ img {
     margin-top: 6px;
 }
 
-.project-item h1 {
+.project-item h3 {
     font-size: var(--proj-title-size);
     font-weight: bold;
     position: relative;
@@ -508,7 +508,7 @@ img {
     top: 48px;
 }
 
-.project-item h1::before {
+.project-item h3::before {
     left: calc(-20px - var(--timeline-width)/2 - var(--timeline-to-content));
     top: 4px;
     position: absolute;
