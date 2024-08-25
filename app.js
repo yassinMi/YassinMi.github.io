@@ -1,7 +1,29 @@
+
+
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+import { getFirestore, doc, setDoc, addDoc, collection, serverTimestamp, deleteDoc } from "https://www.gstatic.com/firebasejs/10.13/firebase-firestore.js";
+
+
 var elems = document.getElementsByClassName("skill")
 var string = "UI/UX"
 var skillsWrapper = document.getElementById("skills-wrapper");
 var lastSkill = document.getElementsByClassName("skill end").item(0);
+const sendMessageForm = document.getElementById("send-message")
+const sendButton = document.getElementById("send-button")
+const messageCard = document.getElementById("message-card")
+const mainButtonIcon = document.getElementById("main-button-icon")
+const closeMessageCardButton = document.getElementById("closeBtn")
+const emailInput = document.getElementById("email-input")
+const messageSent = document.getElementById("message-sent")
+const sendingMessageDiv = document.getElementById("sending-message")
+const messageNotSentDiv = document.getElementById("not-sent")
+
+setVisibility(sendingMessageDiv, false);
+sendingMessageDiv.classList.toggle("initHide", false)
+setVisibility(sendMessageForm, true)
+setVisibility(messageNotSentDiv, false)
+setVisibility(messageSent, false)
 /**
  * @type {HTMLCollectionOf<HTMLImageElement>}
  */
@@ -96,7 +118,7 @@ function startStrong(elem, freq, max, min) {
     setInterval(() => {
         time += 0.016;
 
-        brightness = (((Math.cos(time * freq * 2 * Math.PI) + 1) / 2) * (max - min)) + min;
+        let brightness = (((Math.cos(time * freq * 2 * Math.PI) + 1) / 2) * (max - min)) + min;
         elem.style.opacity = brightness
 
     }, 16);
@@ -116,7 +138,7 @@ function startCsAnimation(elem, freq, max, min) {
     var period = 1 / freq;
     var time = Math.random() * period;
 
-    brightness = (((Math.cos(-time * freq * 2 * Math.PI) + 1) / 2) * (max - min)) + min;
+    let brightness = (((Math.cos(-time * freq * 2 * Math.PI) + 1) / 2) * (max - min)) + min;
     elem.style.opacity = brightness
     setTimeout(() => {
         reset_animation(elem);
@@ -164,6 +186,9 @@ const fadeInSection = (entries, observer) => {
 };
 const observer = new IntersectionObserver(fadeInSection, { threshold: 0.5 });
 
+var isSendingMessage = false;
+var isSendMessageCardOpen = false;
+
 document.addEventListener('DOMContentLoaded', function () {
 
     const cardElems = document.getElementsByClassName('experience-card');
@@ -181,4 +206,234 @@ document.addEventListener('DOMContentLoaded', function () {
         const elem = linkElems.item(i);
         observer.observe(elem);
     }
+
+
+
+    sendMessageForm.addEventListener("submit", async function (ev) {
+
+        ev.preventDefault();
+        var msg = getCurrentFormMessage()
+
+        //# validating input
+
+        if (!msg.email) {
+
+            //todo highlight missing field
+            return
+        }
+        if (!msg.message) {
+            //todo highlight missing field
+            return
+        }
+        //# submit
+        try {
+            setVisibility(sendingMessageDiv, true);
+            setVisibility(mainButtonIcon, false);
+            sendButton.classList.toggle("force-active", true)
+            isSendingMessage = true
+            await submitMessage(msg.email, msg.message)
+
+            setVisibility(messageSent, true)
+        } catch (error) {
+            setVisibility(messageNotSentDiv, true)
+            setVisibility(sendMessageForm, false)
+            isInRetryMode = true;
+            console.error(error)
+            return;
+        }
+        finally {
+            sendButton.classList.toggle("force-active", false)
+
+            isSendingMessage = false;
+            setVisibility(sendingMessageDiv, false);
+            setVisibility(mainButtonIcon, true);
+        }
+        console.log("submit msg:", msg)
+        clearForm()
+        showMessageSentAnimation()
+
+    })
+    sendMessageForm.addEventListener("keydown", function (ev) {
+        ev.stopPropagation()
+    })
+
+    sendButton.addEventListener("click", function (ev) {
+
+        if (!isSendMessageCardOpen) {
+            if (isSendingMessage) {
+                return
+            }
+            sendButton.blur()
+
+            setVisibility(sendMessageForm, true)
+            setVisibility(messageSent, false)
+            sendMessageForm.classList.toggle("hidden", false)
+            messageSent.classList.toggle("hidden", true)
+            setTimeout(() => {
+                emailInput.focus()
+            }, 200);
+
+            setMessageCardVisibility(true);
+        }
+        else {
+            sendMessageForm.dispatchEvent(new Event('submit'))
+        }
+    })
+    closeMessageCardButton.addEventListener("click", function (ev) {
+        clearForm()
+        setMessageCardVisibility(false)
+    })
+
+    initDb();
 });
+function clearForm() {
+    sendMessageForm.reset()
+}
+/**
+ * @typedef {{senderEmail:string,message:string,subject:string}} MessageDoc 
+ */
+/**
+ * 
+ * @param {*} senderEmail 
+ * @param {*} body 
+ */
+async function submitMessage(senderEmail, body, subject) {
+
+    var dtStart = Date.now()
+    /**
+     * @type {MessageDoc}
+     */
+    if (!window._db) {
+        throw new Error("message not sent :( please consider using another messaging method.")
+    }
+    var msgDoc = {
+        message: body, senderEmail: senderEmail, subject: null, sentAt: window._db.serverTimestamp()
+    }
+    lastSentMessageRef = await window._db.addDoc("messages", msgDoc)
+    let minWait = 500;
+    var remaining = Math.max(0, minWait - (Date.now() - dtStart))
+    await delayC(remaining)
+}
+function setMessageCardVisibility(isVisible) {
+    if (ac) {
+        ac.abort()
+    }
+    setVisibility(messageSent, false)
+    setVisibility(sendingMessageDiv, false)
+    setVisibility(messageNotSentDiv, false)
+    isSendMessageCardOpen = isVisible
+    messageCard.classList.toggle("hidden", !isSendMessageCardOpen)
+    mainButtonIcon.innerText = isSendMessageCardOpen ? "send" : "chat_bubble"
+    sendButton.classList.toggle("hidden", false)
+
+}
+function getCurrentFormMessage() {
+    var formData = new FormData(sendMessageForm)
+    let msg = {}
+    formData.forEach((value, key) => {
+        msg[key] = value;
+    });
+    return msg;
+}
+function isFormDirty() {
+    var msg = getCurrentFormMessage();
+    return msg.email && msg.message
+}
+window.addEventListener('beforeunload', (event) => {
+    if (isFormDirty()) {
+        const message = "You have unsaved changes. Are you sure you want to leave?";
+        event.preventDefault(); // For most browsers
+        event.returnValue = message; // For some browsers
+        return message; // For others
+    }
+});
+
+var lastSentMessageRef = null
+async function unsendLastMessage() {
+    if (!window._db) {
+        console.error("database not initialized");
+        return;
+    }
+    if (lastSentMessageRef) {
+        try {
+            await window._db.deleteDoc(lastSentMessageRef)
+            lastSentMessageRef = null
+        }
+        catch (err) {
+            console.error(err)
+        }
+    }
+}
+
+/**
+ * @type {AbortController}
+ */
+var ac
+
+/**
+ * 
+ * @param {number} ms 
+ * @param {AbortSignal} signal 
+ * @returns 
+ */
+async function delayC(ms, signal) {
+
+    return new Promise((res, rej) => {
+        signal?.addEventListener("abort", function () {
+            rej();
+        })
+        setTimeout(res, ms)
+    })
+}
+var isInRetryMode = false;
+function showMessageSentAnimation() {
+    if (ac) {
+        ac.abort()
+    }
+    ac = new AbortController()
+    sendMessageForm.classList.toggle("hidden", true)
+    messageSent.classList.toggle("hidden", false)
+    sendButton.classList.toggle("hidden", true)
+    delayC(2000, ac.signal).then(() => {
+        clearForm()
+        setMessageCardVisibility(false)
+    })
+        .catch(() => {
+
+        })
+        .finally(() => {
+            ac = null
+        })
+
+}
+
+function setVisibility(elem, visible) {
+    if (elem) {
+        elem.style.display = !visible ? "none" : ""
+    }
+}
+var isInitializingDb = false;
+
+async function initDb() {
+    const firebaseConfig = {
+        apiKey: "AIzaSyCa96fsUk7-n73AiWTo7GDwPAycDAiTI8s",
+        authDomain: "yassinmi.firebaseapp.com",
+        projectId: "yassinmi",
+        storageBucket: "yassinmi.appspot.com",
+        messagingSenderId: "665916145431",
+        appId: "1:665916145431:web:5da4af37ad97a1da954152"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    window._db = {
+        addDoc: async (collectionName, doc) => {
+
+            const docRef = await addDoc(collection(db, collectionName), doc);
+            return docRef
+        },
+        deleteDoc,
+        serverTimestamp
+    }
+
+}

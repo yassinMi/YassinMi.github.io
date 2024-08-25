@@ -6,4 +6,7 @@
 art.factory.yass
 
 
-
+# local server
+index.js
+node_modules
+package.json

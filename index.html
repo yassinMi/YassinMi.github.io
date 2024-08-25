@@ -15,11 +15,10 @@
     <meta property="og:description"
         content="Yassine El Hanouti, a .NET Developer with expertise in desktop software development and UI/UX design. Check out my projects and skills.">
     <!--meta property="og:image" content="todo"-->
-    <meta property="og:url" content="https://yassinmi.com">
+    <meta property="og:url" content="https://yassinmi.com/">
     <meta property="og:type" content="website">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8" />
+    <link rel="canonical" href="https://www.yassinmi.com/">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Yassine El Hanouti (Dotnet Developer)</title>
@@ -28,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="app.css" rel="stylesheet" />
 </head>
 
@@ -402,7 +401,60 @@
                         </a>
 
                     </div>
+                    <div class="message min">
+                        <div id="message-card" class="message-card hidden">
+                            <div class="card-header">
+                                <h2 class="section-header" style="margin: 8px 0px;">Direct Message</h2>
+                                <button id="closeBtn" class="icon-btn">
+                                    <span class="material-icons close">close</span>
+                                </button>
+                            </div>
+                            <div class="separator">
+
+                            </div>
+                            <form id="send-message" class="message-card-body" action="#" method="post"
+                                autocomplete="on">
+
+
+
+                                <input autocomplete="email" autocompleteType="email" id="email-input" type="email"
+                                    required name="email" placeholder="Your Email Address" />
+                                <textarea required name="message" placeholder="Your message"></textarea>
+                                <div type="send-placeholder"></div>
+                            </form>
+
+                            <div id="message-sent" class="message-card-body msg-status-text-icon">
+
+                                <span>Message sent</span>
+                                <span>
+
+                                    <span class="material-icons check">check</span>
+                                </span>
+                            </div>
+                            <div id="not-sent" class="message-card-body msg-status-text-icon">
+
+                                <span>Message not sent :(</span>
+                                <span>
+                                    <span class="material-icons check">error</span>
+                                </span>
+                                <p>Please contact me via <a href="mailto:yass.mi2016@gmail.com">email</a></p>
+                            </div>
+                        </div>
+
+                        <button id="send-button" class="floating">
+                            <div id="sending-message" class="initHide">
+                                <div class="loader"></div>
+                            </div>
+                            <span id="main-button-icon" class="material-icons icon">chat_bubble</span>
+                        </button>
+
+
+
+                    </div>
+
+
                 </section>
+
             </div>
 
 
@@ -412,7 +464,11 @@
         <div class="empty-space"></div>
         <div class="large-image-view"></div>
     </div>
+    <script type="module">
+
+
+    </script>
 </body>
-<script src="app.js"></script>
+<script type="module" src="app.js"></script>
 
 </html>
