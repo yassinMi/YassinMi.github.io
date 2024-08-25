@@ -324,6 +324,7 @@ function setMessageCardVisibility(isVisible) {
     isSendMessageCardOpen = isVisible
     messageCard.classList.toggle("hidden", !isSendMessageCardOpen)
     mainButtonIcon.innerText = isSendMessageCardOpen ? "send" : "chat_bubble"
+    sendButton.title = isSendMessageCardOpen ? "Send" : "Direct Message"
     sendButton.classList.toggle("hidden", false)
 
 }

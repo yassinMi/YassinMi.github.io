@@ -405,7 +405,7 @@
                         <div id="message-card" class="message-card hidden">
                             <div class="card-header">
                                 <h2 class="section-header" style="margin: 8px 0px;">Direct Message</h2>
-                                <button id="closeBtn" class="icon-btn">
+                                <button id="closeBtn" class="icon-btn" title="Cancel">
                                     <span class="material-icons close">close</span>
                                 </button>
                             </div>
@@ -417,9 +417,10 @@
 
 
 
-                                <input autocomplete="email" autocompleteType="email" id="email-input" type="email"
-                                    required name="email" placeholder="Your Email Address" />
-                                <textarea required name="message" placeholder="Your message"></textarea>
+                                <input title="Your email" autocomplete="email" autocompleteType="email" id="email-input"
+                                    type="email" required name="email" placeholder="Your Email Address" />
+                                <textarea title="Your message" required name="message"
+                                    placeholder="Your message"></textarea>
                                 <div type="send-placeholder"></div>
                             </form>
 
@@ -441,7 +442,7 @@
                             </div>
                         </div>
 
-                        <button id="send-button" class="floating">
+                        <button id="send-button" class="floating" title="Direct Message">
                             <div id="sending-message" class="initHide">
                                 <div class="loader"></div>
                             </div>
