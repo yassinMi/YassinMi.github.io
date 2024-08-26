@@ -24,6 +24,11 @@
     --timeline-to-content: 16px;
     --cards-border-radius: 16px;
 }
+.material-icons {
+    font-family: 'Material Icons';
+    visibility: hidden;
+}
+
 
 html,
 body {
@@ -36,7 +41,9 @@ body {
     display: flex;
     flex-direction: column;
 }
-
+.material-icons-loaded .material-icons {
+    visibility: visible;
+}
 #main {
     align-self: center;
     width: 100%;

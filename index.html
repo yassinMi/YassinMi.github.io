@@ -17,6 +17,7 @@
     <!--meta property="og:image" content="todo"-->
     <meta property="og:url" content="https://yassinmi.com/">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="YassinMi">
 
     <link rel="canonical" href="https://www.yassinmi.com/">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -29,6 +30,16 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="app.css" rel="stylesheet" />
+
+    <script type="application/ld+json">
+        {
+          "@context" : "https://schema.org",
+          "@type" : "WebSite",
+          "name": "YassinMi",
+          "alternateName": ["Yassin Mi", "yassinmi.com"],
+          "url" : "https://www.yassinmi.com/"
+        }
+      </script>
 </head>
 
 <body>
@@ -446,7 +457,7 @@
                             <div id="sending-message" class="initHide">
                                 <div class="loader"></div>
                             </div>
-                            <span id="main-button-icon" class="material-icons icon">chat_bubble</span>
+                            <span id="main-button-icon" style="font-display: block;" class="material-icons icon">chat_bubble</span>
                         </button>
 
 
@@ -467,6 +478,10 @@
     </div>
     <script type="module">
 
+
+    document.fonts.ready.then(function () {
+        document.body.classList.add('material-icons-loaded');
+    });
 
     </script>
 </body>
