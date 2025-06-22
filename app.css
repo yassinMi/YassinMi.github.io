@@ -38,7 +38,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: 12pt;
     color: #fafafa;
-    background-color: rgb(37, 37, 37);
+    background-color: #1b1b1b;
     display: flex;
     flex-direction: column;
 }
@@ -367,6 +367,10 @@ a.link:visited {
     /*used to trigger fade in when scrolling*/
     opacity: 1;
     transform: rotateX(0deg);
+}
+
+.project-item.hidden{
+    display: none;
 }
 
 .project-content {

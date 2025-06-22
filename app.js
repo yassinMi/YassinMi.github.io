@@ -18,6 +18,7 @@ const emailInput = document.getElementById("email-input")
 const messageSent = document.getElementById("message-sent")
 const sendingMessageDiv = document.getElementById("sending-message")
 const messageNotSentDiv = document.getElementById("not-sent")
+const allowMultipleFilters = false;
 
 setVisibility(sendingMessageDiv, false);
 sendingMessageDiv.classList.toggle("initHide", false)
@@ -283,6 +284,71 @@ document.addEventListener('DOMContentLoaded', function () {
         clearForm()
         setMessageCardVisibility(false)
     })
+
+
+    //init interactive filters chips
+    var filtersWrapper = document.querySelector('.filters-wrapper');
+    var filterChipTemplate = document.querySelector('#filter-button-template');
+
+    //creating filter chips
+    const filters = {'All':null, 'Web Full-Stack':['web','full-stack'],'Windows Desktop':['windows','dekstop'], 'Mobile and IoT':['mobile',"iot"], 'other':['cli-tools']};
+   
+    Object.keys(filters).forEach(filter => {
+        const chip = filterChipTemplate.content.cloneNode(true);
+        const button = chip.querySelector('.filter-button');
+        button.setAttribute('data-filter', filter);
+        button.querySelector(".label"). textContent = filter;
+        if (filter.toLowerCase() === 'all') {
+            button.classList.add('active');
+        }
+        filtersWrapper.appendChild(chip);
+    });
+    document.querySelectorAll('.filter-button').forEach(chip => {
+        chip.addEventListener('click', () => {
+            chip.classList.toggle('active');
+            const filter = chip.getAttribute('data-filter');
+            //disabling UI state for non "all" filters
+            if((filter=="All"||!allowMultipleFilters)&&chip.classList.contains('active')) {
+                 document.querySelectorAll('.filter-button').forEach(c => {
+                    if(c===chip) return;
+                    c.classList.remove('active');
+                 })
+            }
+            //disabling all if needed
+            if(filter!="All"&&chip.classList.contains('active')) {
+                document.querySelector('.filter-button[data-filter="All"]').classList.remove('active');
+            }
+            const items = document.querySelectorAll(`.project-item[data-filter="${filter}"]`);
+            items.forEach(item => {
+                item.classList.toggle('hidden', !chip.classList.contains('active'));
+            });
+            var enabledFilters = Array.from(document.querySelectorAll('.filter-button.active')).map(c => filters[c.getAttribute('data-filter')] );
+            if (enabledFilters.length === 0 || enabledFilters.includes('All')) {
+                document.querySelectorAll('.project-item').forEach(item => {
+                    item.classList.remove('hidden');
+                });
+            }
+            else {
+                console.log("enabled filters:", enabledFilters)
+                document.querySelectorAll('.project-item').forEach(item => {
+                    const itemCetegories= item.getAttribute('data-categories')?.split(',') || [];
+                    console.log("item categories:", itemCetegories)
+                    var isVisible = enabledFilters.some(filter => {
+                        if (!filter) return true; //if filter is null, show all items
+                        console.log("checking filter:", filter, "in", itemCetegories)
+                        return itemCetegories.some(category => {
+                            return filter.includes(category);
+                        });
+                    });
+                    console.log("isVisible:", isVisible, "for item:", item,"because", itemCetegories, "and filter:", enabledFilters, "filter:", filter)
+                    item.classList.toggle('hidden', !isVisible);
+
+                });
+            }
+
+        }
+        );
+    });
 
     initDb();
 });

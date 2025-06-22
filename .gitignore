@@ -8,5 +8,6 @@ art.factory.yass
 
 # local server
 index.js
+package-lock.json
 node_modules
 package.json

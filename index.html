@@ -205,14 +205,7 @@
                                 C# developers with code reviews and practical tips.
                             </p>
                         </div>
-                        <!--<div class="experience-card">
-                            <div class="experience-icon">
-                                
-                            </div>
-                            <p>
-                                Successfully managed high-responsibility projects, such as medical software development, showcasing an ability to accurately translate complex requirements into reliable software solutions.
-                            </p>
-                        </div>-->
+
 
                     </div>
                 </section>
@@ -220,10 +213,138 @@
 
 
                     <h2 class="section-header">Projects</h2>
+                    <style>
+                        .filters-wrapper {
+                            display: flex;
+                            justify-content: start;
+                            margin-bottom: 20px;
+                            flex-wrap: wrap;
+                            row-gap: 12px;
+                        }
+
+                        .filter-button {
+                            background-color: #292a2a;
+                            border: none;
+                            padding: 2px 14px;
+                            margin: 0 5px;
+                            cursor: pointer;
+                            font-size: 16px;
+                            border-radius: 16px;
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            gap: 4px;
+                            border: 1px solid hsla(162, 87%, 70%, 0.137);
+                            height: 30px;
+                        }
+
+                        .filter-button>.checkmark {
+                            display: none;
+                            height: 20px;
+                            width: 20px;
+                        }
+
+                        .filter-button.active {
+                            background-color: #08b07e;
+                            color: white;
+                        }
+
+                        .filter-button.active>.checkmark {
+                            display: block;
+                        }
+
+                        .project-item {
+                            margin-bottom: 30px;
+                        }
+
+                        .project-tag {
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        .project-tag span {
+                            margin-right: 10px;
+                        }
+
+                        .project-tag .separator {
+                            width: 1px;
+                            height: 20px;
+                            background-color: #ccc;
+                        }
+                    </style>
+                    <div class="filters-wrapper">
+                        <template id="filter-button-template">
+
+                            <button class="filter-button" data-filter="{{filter}}">
+                                <div class="checkmark">
+                                    <span class="mdc-evolution-chip__graphic mat-mdc-chip-graphic">
+                                        <span class="mdc-evolution-chip__checkmark">
+                                            <svg width="20px" height="20px" viewBox="-2 -3 30 30" stroke-width="2"
+                                                focusable="false" aria-hidden="true"
+                                                class="mdc-evolution-chip__checkmark-svg">
+                                                <path fill="none" stroke="currentColor"
+                                                    d="M1.73,12.91 8.1,19.28 22.79,4.59"
+                                                    class="mdc-evolution-chip__checkmark-path"></path>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </div>
+                                <spa class="label"></spa>
+
+                            </button>
+                        </template>
+                    </div>
                     <div class="timeline">
 
                         <div>
-                            <div class="project-item">
+                            <div class="project-item" data-categories="windows,desktop">
+                                <div class="project-content">
+                                    <h3>Web scraping utility (WPF)</h3>
+                                    <div class="project-tag green">
+                                        <span>Freelance Project</span>
+                                        <div class="separator"></div>
+                                        <span>JAN 2022</span>
+                                    </div>
+                                    <ul>
+                                        <li>Designed and delivered a tailored solution for a small business, combining
+                                            data scraping function and lead management into a single application.</li>
+                                        <li>Adapted and scaled the project across multiple iterations to meet evolving
+                                            business needs.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="project-images">
+                                    <img src="./img/pp-1.png" alt="Scraper and besboke leads managme all in one place"
+                                        class="im img1-v2-1" />
+
+                                </div>
+
+                            </div>
+                            <div class="project-item" data-categories="full-stack,web">
+                                <div class="project-content">
+                                    <h3>Web Crawlers Managment System (ASP.NET)</h3>
+                                    <div class="project-tag green">
+                                        <span>Freelance Project</span>
+                                        <div class="separator"></div>
+                                        <span>AUG 2024</span>
+                                    </div>
+                                    <ul>
+                                        <li>Built a modular, developer-friendly web crawling framework with a focus on
+                                            monitoring, coordination, and scalability.</li>
+                                        <li>Designed backend architecture in C# and frontend in vanilla JS, with
+                                            real-time updates powered by SignalR.</li>
+                                        <li>Prioritized usability for both technical and non-technical users.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="project-images">
+                                    <img src="./img/scrapers-mgr-1-b.png" alt="Scrapers managment"
+                                        class="im img1-v2-1" />
+
+                                </div>
+
+                            </div>
+                            <div class="project-item" data-categories="windows,desktop">
                                 <div class="project-content">
                                     <h3>Medical Imaging Software (WPF)</h3>
                                     <div class="project-tag green">
@@ -253,7 +374,7 @@
                                 </div>
 
                             </div>
-                            <div class="project-item">
+                            <div class="project-item" data-categories="windows,desktop">
                                 <div class="project-content">
                                     <h3>Fintech ETL Data Management Application (WPF)</h3>
                                     <div class="project-tag green">
@@ -280,7 +401,7 @@
                                         alt="Local Data Warehousing Solution - Import Preview Window" class="im img3" />
                                 </div>
                             </div>
-                            <div class="project-item">
+                            <div class="project-item" data-categories="windows,desktop">
                                 <div class="project-content">
                                     <h3>Educational Electronics Simulator</h3>
                                     <div class="project-tag purple">
@@ -311,7 +432,7 @@
                                         alt="Electronics Simulation Software - Oscilloscope Window" class="im img5" />
                                 </div>
                             </div>
-                            <div class="project-item">
+                            <div class="project-item" data-categories="mobile,iot">
                                 <div class="project-content">
                                     <h3>Embedded IoT Irrigation System (C++ and React Native) </h3>
                                     <div class="project-tag purple">
@@ -337,6 +458,238 @@
                             </div>
                         </div>
                     </div>
+                </section>
+                <section>
+
+
+                    <h2 class="section-header">Testimonials</h2>
+                    <style>
+                        .shadow-svg {
+                            /*filter: drop-shadow(1px 0px 4px hsl(var(--primary-hue), 87%, 70%));*/
+                            position: absolute;
+                            color: hsl(180, 58%, 70%);
+
+                            height: 38px;
+                            width: 38px;
+                        }
+
+                        .testimonials-carousel {
+                            display: flex;
+                            gap: 20px;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                            perspective: 800px;
+                            min-height: 420px;
+                        }
+
+                        .testimonial-item {
+                            cursor: pointer;
+                            border: 1px solid hsla(162, 87%, 70%, 0.137);
+                            /* border: 1px solid hsl(162, 87%, 70%); */
+                            padding: 8px;
+                            padding-inline: 16px;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-items: right;
+                            background-color: hsla(162, 9%, 27%, 0.137);
+                            /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.041); */
+                            box-shadow: 0 0 14px rgba(0, 0, 0, 0.226);
+                            border-radius: var(--cards-border-radius);
+                            transform-origin: bottom;
+                            transition: opacity 1s ease-in-out, transform 0.2s linear;
+                            width: 400px;
+                            transform: rotateY(0);
+                            -webkit-tap-highlight-color: transparent;
+                            -webkit-user-select: none;
+                            user-select: none;
+                        }
+
+                        .testimonial-item:hover {
+                            transform: rotateY(10deg);
+                            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+                        }
+
+                        .testimonial-content {
+                            font-size: 16px;
+                            color: #ececec;
+                            position: relative;
+                            padding: 20px;
+
+                        }
+
+                        .testimonial-info {
+                            display: flex;
+
+                            flex-direction: row;
+                            justify-content: space-between;
+                            gap: 8px;
+                            align-self: stretch;
+                            padding: 0 20px 20px 20px;
+                            font-size: small;
+                        }
+
+                        .testimonial-info .author-and-country {
+                            display: flex;
+
+                            flex-direction: row;
+                            justify-content: center;
+                            gap: 8px;
+                        }
+
+                        .testimonial-content p {
+                            margin-bottom: 10px;
+                            margin-top: 20px;
+                        }
+
+                        .author {
+                            font-weight: bold;
+                            color: #bebebe;
+                        }
+                    </style>
+                    <div class="testimonials-carousel">
+                        <div class="testimonial-item">
+                            <div class="testimonial-content">
+                                <svg class="shadow-svg" style="transform: scaleX(-1) scaleY(-1); top:0; left:0;"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
+                                    <path
+                                        d="m228-240 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T458-480L320-240h-92Zm360 0 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T818-480L680-240h-92ZM320-500q25 0 42.5-17.5T380-560q0-25-17.5-42.5T320-620q-25 0-42.5 17.5T260-560q0 25 17.5 42.5T320-500Zm360 0q25 0 42.5-17.5T740-560q0-25-17.5-42.5T680-620q-25 0-42.5 17.5T620-560q0 25 17.5 42.5T680-500Zm0-60Zm-360 0Z" />
+                                </svg>
+
+                                <p>
+                                    -
+                                </p>
+                                <svg class="shadow-svg" style="right:0; display:none;"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
+                                    <path
+                                        d="m228-240 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T458-480L320-240h-92Zm360 0 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T818-480L680-240h-92ZM320-500q25 0 42.5-17.5T380-560q0-25-17.5-42.5T320-620q-25 0-42.5 17.5T260-560q0 25 17.5 42.5T320-500Zm360 0q25 0 42.5-17.5T740-560q0-25-17.5-42.5T680-620q-25 0-42.5 17.5T620-560q0 25 17.5 42.5T680-500Zm0-60Zm-360 0Z" />
+                                </svg>
+
+
+                            </div>
+                            <div class="testimonial-info">
+                                <span class="date">-</span>
+                                <span class="author-and-country">
+                                    <span class="author">-</span>
+                                    <span class="country-flag">
+                                        <img src="https://flagcdn.com/w20/ua.png"
+                                            srcset="https://flagcdn.com/w40/ma.png 2x" width="20" alt="Ukraine">
+                                    </span>
+                                </span>
+
+
+                            </div>
+                        </div>
+
+                        <script>
+                            var isHovered_ = false;
+                            var isAnimating = false;
+                            const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+                            var testimonialsData = [
+
+                                { text: "Having worked with so many freelancers across many fiverr and the likes platform, I can honestly say he is a real gem! not only he took the time to understand your requirement, he will also recommend a better way to achieve the result. Without a doubt will look for him for any new project and highly recommend him to anyone who needs to create customized app! Thank you so much!", date: "2023", author: "zul_empire", country: "my" },
+                                { text: "He suggested and added many more features than I wanted. Very fast and smart. The best service I have ever received from Fiverr.", date: "2023", author: "omertc", country: "tr" },
+                                { text: "Awesome service, great communication, excellent turnaround time. Definitely recommend!", date: "2023", author: "ygrekar", country: "fr" },
+                                { text: "Great job man ,,i really appreciated, you did complex job in 2 days ,,I really recommend you and will do 3 projects more ,,. thanks Alot", date: "2023", author: "ahmadsaad162", country: "ae" },
+                                { text: "It was my first project with Yasin...Very Nice experience working with.. Working on more projects.", date: "2023", author: "jitendrashah728", country: "in" },
+                                { text: "Quick response, good communication around requirements, solid solution. Very satisfied. Already ordered second project.", date: "2023", author: "pbul001", country: "za" },
+                                { text: "⭐⭐⭐⭐⭐ Great service, fast delivery, and very professional. Communication was easy and quick. Highly recommend for data extraction and automation work!", date: "2023", author: "andrey213", country: "de" },
+                                { text: "Great to work with, understood the task, my instructions and needs & did the job super quickly, 100% recommend. Thanks", date: "2023", author: "darran360", country: "gb" },
+                                { text: "Winterspell was very easy to work with. They were able to quickly chat and ask questions to figure out the requirements. I would work with Winterspell again in the future.", date: "2024", author: "slna0201", country: "us" },
+                                { text: "Yassin is a very professional programmer to work with. He is excellent in communication, reviewed our requirements carefully and came up with multiple solutions for each part of the program. He even added some functions which we hadn't asked, just to make program work much better and be more user friendly. He did multiple revisions without any problem, and always did his best to excel on any request we make and deliver even better solution. Highly recommended for anyone who wants a patient and listening/understanding programmer to work with ", date: "2024", author: "hgsing", country: "sg" },
+                                { text: "This seller was excellent to work with. Firstly he gave confidence that he could successfully do the task by requesting some more information about the brief and testing that his approach would work. Throughout the process, he communicated very well making suggestions and requesting feedback. the final product is just what i was looking for. I would happily recommend his services.", date: "2024", author: "z0ff94010", country: "au" },
+                                { text: "Insanely helpful, really prompt and went way beyond my expectations. Couldn't recommend more!", date: "2024", author: "crane_z", country: "gb" },
+                                { text: "Very professional. Great communication and very quick to respond. I highly recommend working with him !", date: "2024", author: "abdelhakchaker", country: "pl" },
+                                { text: "Working with him for the second time. I highly recommend working with him, very professional and delivers the results no matter what in a timely manner. Very good communication. I will definitely work with him again in the future.", date: "2024", author: "abdelhakchaker", country: "pl" },
+                            ]
+                            var currentTestimonialIndex = 5;
+                            var testimonialItem = document.querySelector('.testimonial-item');
+                            function isHovered() {
+                                return isHovered_ && !isTouch;
+                            }
+                            testimonialItem.addEventListener("mouseenter", function () {
+                                if (!isAnimating && !isTouch) {
+                                    testimonialItem.style.transform = "rotateY(10deg)";
+                                }
+
+                                isHovered_ = true;
+                            });
+                            testimonialItem.addEventListener("mouseleave", function () {
+                                if (!isAnimating && !isTouch) {
+                                    testimonialItem.style.transform = "rotateY(0deg)";
+                                }
+                                isHovered_ = false;
+                            });
+                            function populateTestimonialContent() {
+                                var testimonialData = testimonialsData[currentTestimonialIndex];
+                                testimonialItem.querySelector('.testimonial-content').querySelector('p').textContent = testimonialData.text;
+                                testimonialItem.querySelector('.testimonial-info').querySelector('.date').textContent = testimonialData.date;
+                                testimonialItem.querySelector('.testimonial-info').querySelector('.author').textContent = testimonialData.author;
+                                var countryFlag = testimonialItem.querySelector('.testimonial-info').querySelector('.country-flag')
+                                    .querySelector('img');
+                                countryFlag.src = "https://flagcdn.com/w20/" + testimonialData.country + ".png";
+                                countryFlag.srcset = "https://flagcdn.com/w40/" + testimonialData.country + ".png 2x";
+                                countryFlag.alt = testimonialData.country.toUpperCase();
+                            }
+                            populateTestimonialContent();
+                            testimonialItem.addEventListener("click", async function () {
+
+                                isAnimating = true;
+                                testimonialItem.style.transition = "opacity 1s ease-in-out, transform 0s linear";
+
+                                testimonialItem.style.transform = isHovered() ? "rotateY(10deg)" : "rotateY(0deg)";
+
+                                testimonialItem.style.transition = "opacity 1s ease-in-out, transform 0.2s linear";
+                                await new Promise(resolve => requestAnimationFrame(resolve));
+                                testimonialItem.style.transform = "rotateY(90deg)";
+                                await new Promise(resolve => requestAnimationFrame(resolve));
+
+                                await new Promise(resolve => {
+                                    testimonialItem.addEventListener('transitionend', resolve, { once: true });
+                                });
+
+                                currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonialsData.length;
+                                populateTestimonialContent();
+
+
+                                testimonialItem.style.transition = "opacity 1s ease-in-out, transform 0s linear";
+                                await new Promise(resolve => requestAnimationFrame(resolve));
+
+                                testimonialItem.style.transform = "rotateY(-90deg)";
+                                await new Promise(resolve => requestAnimationFrame(resolve));
+
+
+
+                                testimonialItem.style.transition = "opacity 1s ease-in-out, transform 0.2s linear";
+                                await new Promise(resolve => requestAnimationFrame(resolve));
+
+                                testimonialItem.style.transform = isHovered() ? "rotateY(10deg)" : "rotateY(0deg)";
+
+                                await new Promise(resolve => { testimonialItem.addEventListener('transitionend', resolve, { once: true }); });
+
+                                if (isHovered()) {
+                                    testimonialItem.style.transform = "rotateY(10deg)";
+                                } else {
+                                    testimonialItem.style.transform = "rotateY(0deg)";
+                                }
+
+
+
+
+                                isAnimating = false;
+
+                            });
+
+
+
+
+                        </script>
+
+
+                    </div>
+
                 </section>
                 <section>
 
@@ -458,31 +811,20 @@
                             <div id="sending-message" class="initHide">
                                 <div class="loader"></div>
                             </div>
-                            <span id="main-button-icon" style="font-display: block;" class="material-icons icon">chat_bubble</span>
+                            <span id="main-button-icon" style="font-display: block;"
+                                class="material-icons icon">chat_bubble</span>
                         </button>
-
-
-
                     </div>
-
-
                 </section>
-
             </div>
-
-
-
-
         </div>
         <div class="empty-space"></div>
         <div class="large-image-view"></div>
     </div>
     <script type="module">
-
-
-    document.fonts.ready.then(function () {
-        document.body.classList.add('material-icons-loaded');
-    });
+        document.fonts.ready.then(function () {
+            document.body.classList.add('material-icons-loaded');
+        });
 
     </script>
 </body>
