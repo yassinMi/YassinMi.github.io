@@ -351,7 +351,29 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     initDb();
+    notifyAction("PageLoaded", null,null)
 });
+function notifyAction(actionType, param1, param2) {
+   var apiEndpoint = "https://api.yassinmi.com/action";
+   var data = {
+        actionType: actionType,
+        param1: param1,
+        param2: param2
+    };
+    fetch(apiEndpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(data => {
+        console.log('loaded-');
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
 function clearForm() {
     sendMessageForm.reset()
 }
