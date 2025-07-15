@@ -351,7 +351,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     initDb();
-    notifyAction("PageLoaded", null,null)
+    notifyAction("PageLoaded", document.referrer,null)
 });
 function notifyAction(actionType, param1, param2) {
    var apiEndpoint = "https://api.yassinmi.com/action";
