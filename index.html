@@ -60,30 +60,365 @@
                     <p> Experienced in creating user-friendly desktop apps and dynamic web applications using the .NET ecosystem.
                     </p>
                 </section>
-                <section>
-                    <h2 class="section-header">Skills</h2>
-                    <div class="skills-wrapper" id="skills-wrapper">
-                        <span class="skill skill0">WPF</span>
-                        <span class="skill">XAML</span>
-                        <span class="skill">Web Forms</span>
-                        <span class="skill">ASP.NET</span>
+            <section>
+                <h2 class="section-header">Skills</h2>
+                 <style>
+                        .filters-wrapper {
+                            display: flex;
+                            justify-content: start;
+                            margin-bottom: 20px;
+                            flex-wrap: wrap;
+                            row-gap: 12px;
+                        }
 
-                        <span class="skill skill0">C# Programming</span>
-                        <span class="skill skill0">.NET Framework</span>
-                        <span class="skill">Linq</span>
-                        <span class="skill">Threading</span>
-                        <span class="skill">Parallelism</span>
-                        <span class="skill">OOP</span>
-                        <span class="skill skill1">Design Patterns</span>
-                        <span class="skill">MVVM</span>
-                        <span class="skill skill1">SQL</span>
-                        <span class="skill">SQLite</span>
-                        <span class="skill skill1">Debugging & troubleshooting</span>
-                        <span class="skill">Unit Testing</span>
-                        <span class="skill skill1">Visual Studio</span>
-                        <span class="skill end">UI/UX </span>
+                        .filter-button {
+                            background-color: #292a2a;
+                            border: none;
+                            padding: 2px 14px;
+                            margin: 0 5px;
+                            cursor: pointer;
+                            font-size: 16px;
+                            border-radius: 16px;
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            gap: 4px;
+                            border: 1px solid hsla(162, 87%, 70%, 0.137);
+                            height: 30px;
+                        }
+
+                        .filter-button>.checkmark {
+                            display: none;
+                            height: 20px;
+                            width: 20px;
+                        }
+
+                        .filter-button.active {
+                            background-color: #08b07e;
+                            color: white;
+                        }
+
+                        .filter-button.active>.checkmark {
+                            display: block;
+                        }
+
+                        .project-item {
+                            margin-bottom: 30px;
+                        }
+
+                        .project-tag {
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        .project-tag span {
+                            margin-right: 10px;
+                        }
+
+                        .project-tag .separator {
+                            width: 1px;
+                            height: 20px;
+                            background-color: #ccc;
+                        }
+                    </style>
+                    <div class="filters-wrapper" id="skills-filters-wrapper">
+                        <template id="filter-button-template">
+
+                            <button class="filter-button" data-filter="{{filter}}">
+                                <div class="checkmark">
+                                    <span class="mdc-evolution-chip__graphic mat-mdc-chip-graphic">
+                                        <span class="mdc-evolution-chip__checkmark">
+                                            <svg width="20px" height="20px" viewBox="-2 -3 30 30" stroke-width="2"
+                                                focusable="false" aria-hidden="true"
+                                                class="mdc-evolution-chip__checkmark-svg">
+                                                <path fill="none" stroke="currentColor"
+                                                    d="M1.73,12.91 8.1,19.28 22.79,4.59"
+                                                    class="mdc-evolution-chip__checkmark-path"></path>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </div>
+                                <span class="label"></span>
+
+                            </button>
+                        </template>
                     </div>
-                </section>
+                <div class="skills-wrapper frameworks" id="skills-wrapper">
+            
+                    <div class="atomic">
+                        <span class="group-head" data-category="frontend">
+                            <div class="id"><span>Front-end</span></div>
+                        </span>
+                        <span class="skill framework icon skill0" data-category="frontend">
+                            <div class="id"><img src="/icons/mono/javascript.svg" /><span>Javascript</span></div>
+                            <div class="progress-wrapper">
+                                <div class="progress-bar">
+                                    <div class="progress-inner" style="width: 95%;"></div>
+                                </div>
+                                <span>Advanced</span>
+                            </div>
+                        </span>
+                    </div>
+                    <span class="skill framework icon" data-category="frontend">
+                        <div class="id"><img src="/icons/mono/react.svg" /><span>ReactJS</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 50%;"></div>
+                            </div>
+                            <span>Intermediate</span>
+                        </div>
+                    </span>
+            
+                    <div class="line-breaker"></div>
+                    <div class="atomic">
+                        <span class="group-head" data-category="backend">
+                            <div class="id"><span>Back-end</span></div>
+                        </span>
+                        <span class="skill framework icon" data-category="backend">
+                            <div class="id"><img src="/icons/mono/aspnet.svg" /><span>ASP.NET</span></div>
+                            <div class="progress-wrapper">
+                                <div class="progress-bar">
+                                    <div class="progress-inner" style="width: 50%;"></div>
+                                </div>
+                                <span>Intermediate</span>
+                            </div>
+                        </span>
+                    </div>
+                    <span class="skill framework icon skill1" data-category="backend">
+                        <div class="id"><img src="/icons/mono/blazor.svg" /><span>Blazor</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 20%;"></div>
+                            </div>
+                            <span>Beginner</span>
+                        </div>
+                    </span>
+                    <span class="skill framework skill0 icon" data-category="backend">
+                        <div class="id"><img src="/icons/mono/c-sharp.svg" /><span>C# Programming</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 95%;"></div>
+                            </div>
+                            <span>Advanced</span>
+                        </div>
+                    </span>
+                    <span class="skill framework skill0 icon" data-category="backend">
+                        <div class="id"><img src="/icons/mono/net-core.svg" /><span>.NET Framework</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 95%;"></div>
+                            </div>
+                            <span>Advanced</span>
+                        </div>
+                    </span>
+                    <span class="skill framework skill0 icon" data-category="backend">
+                        <div class="id"><img src="/icons/mono/nodejs.svg" /><span>NodeJS</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 95%;"></div>
+                            </div>
+                            <span>Advanced</span>
+                        </div>
+                    </span>
+                    <span class="skill framework skill0" data-category="backend">
+                        <div class="id"><span>Web Forms</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 95%;"></div>
+                            </div>
+                            <span>Advanced</span>
+                        </div>
+                    </span>
+                    <span class="skill framework skill0" data-category="backend">
+                        <div class="id"><span>Linq</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 95%;"></div>
+                            </div>
+                            <span>Advanced</span>
+                        </div>
+                    </span>
+                    <div class="line-breaker"></div>
+            
+                    <div class="atomic">
+                        <span class="group-head" data-category="desktop">
+                            <div class="id"><span>Native</span></div>
+                        </span>
+                        <span class="skill framework skill0" data-category="desktop">
+                            <div class="id">
+                                <span>WPF</span>
+                            </div>
+                            <div class="progress-wrapper">
+                                <div class="progress-bar">
+                                    <div class="progress-inner" style="width: 95%;"></div>
+                                </div>
+                                <span>Advanced</span>
+                            </div>
+                        </span>
+                    </div>
+            
+                    <span class="skill framework skill0" data-category="desktop">
+                        <div class="id"><span>XAML</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 95%;"></div>
+                            </div>
+                            <span>Advanced</span>
+                        </div>
+                    </span>
+            
+                    <div class="line-breaker"></div>
+            
+                    <div class="atomic">
+                        <span class="group-head" data-category="tools">
+                            <div class="id"><span>Tools</span></div>
+                        </span>
+                        <span class="skill framework icon skill0" data-category="tools">
+                            <div class="id"><img src="/icons/mono/git.svg" /><span>Git</span></div>
+                            <div class="progress-wrapper">
+                                <div class="progress-bar">
+                                    <div class="progress-inner" style="width: 95%;"></div>
+                                </div>
+                                <span>Advanced</span>
+                            </div>
+                        </span>
+                    </div>
+                    <span class="skill framework skill0 icon" data-category="tools">
+                        <div class="id"><img src="/icons/mono/visualstudio.svg" /><span>Visual Studio</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 95%;"></div>
+                            </div>
+                            <span>Advanced</span>
+                        </div>
+                    </span>
+                    <span class="skill framework icon skill1" data-category="tools">
+                        <div class="id"><img src="/icons/mono/docker.svg" /><span>Docker</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 20%;"></div>
+                            </div>
+                            <span>Beginner</span>
+                        </div>
+                    </span>
+                    <div class="line-breaker"></div>
+                    <div class="atomic">
+            
+                        <span class="group-head" data-category="database">
+                            <div class="id"><span>Database</span></div>
+                        </span>
+                        <span class="skill framework skill0" data-category="database">
+                            <div class="id"><span>SQL Server</span></div>
+                            <div class="progress-wrapper">
+                                <div class="progress-bar">
+                                    <div class="progress-inner" style="width: 95%;"></div>
+                                </div>
+                                <span>Advanced</span>
+                            </div>
+                        </span>
+                    </div>
+                    <span class="skill framework icon skill0" data-category="database">
+                        <div class="id"><img src="/icons/mono/sqlite.svg" /><span>SQLite</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 95%;"></div>
+                            </div>
+                            <span>Advanced</span>
+                        </div>
+                    </span>
+                    <span class="skill framework icon" data-category="database">
+                        <div class="id"><img src="/icons/mono/mongodb.svg" /><span>MongoDb</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 50%;"></div>
+                            </div>
+                            <span>Intermediate</span>
+                        </div>
+                    </span>
+                    <span class="skill framework icon" data-category="database">
+                        <div class="id"><img src="/icons/mono/firebase.svg" /><span>Firebase</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 50%;"></div>
+                            </div>
+                            <span>Intermediate</span>
+                        </div>
+                    </span>
+                    <div class="line-breaker"></div>
+            
+                    <div class="atomic">
+                        <span class="group-head" data-category="design">
+                            <div class="id"><span>Design</span></div>
+                        </span>
+                        <span class="skill framework" data-category="design">
+                            <div class="id"><span>Parallelism</span></div>
+                            <div class="progress-wrapper">
+                                <div class="progress-bar">
+                                    <div class="progress-inner" style="width: 50%;"></div>
+                                </div>
+                                <span>Intermediate</span>
+                            </div>
+                        </span>
+                    </div>
+                    <span class="skill framework skill0" data-category="design">
+                        <div class="id"><span>OOP</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 95%;"></div>
+                            </div>
+                            <span>Advanced</span>
+                        </div>
+                    </span>
+                    <span class="skill framework" data-category="design">
+                        <div class="id"><span>Design Patterns</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 50%;"></div>
+                            </div>
+                            <span>Intermediate</span>
+                        </div>
+                    </span>
+                    <span class="skill framework skill0" data-category="design">
+                        <div class="id"><span>MVVM</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 95%;"></div>
+                            </div>
+                            <span>Advanced</span>
+                        </div>
+                    </span>
+                    <span class="skill framework skill0" data-category="design">
+                        <div class="id"><span>Debugging & troubleshooting</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 95%;"></div>
+                            </div>
+                            <span>Advanced</span>
+                        </div>
+                    </span>
+                    <span class="skill framework skill0" data-category="design">
+                        <div class="id"><span>Unit Testing</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 95%;"></div>
+                            </div>
+                            <span>Advanced</span>
+                        </div>
+                    </span>
+                    <span class="skill framework icon" data-category="design">
+                        <div class="id"><img src="/icons/mono/figma.svg" /><span>Figma</span></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-inner" style="width: 50%;"></div>
+                            </div>
+                            <span>Intermediate</span>
+                        </div>
+                    </span>
+            
+            
+                </div>
+            </section>
+
                 <section>
                     <h2 class="section-header">Languages</h2>
                     <div class="skills-wrapper">
@@ -270,7 +605,7 @@
                             background-color: #ccc;
                         }
                     </style>
-                    <div class="filters-wrapper">
+                    <div class="filters-wrapper" id="project-filters-wrapper">
                         <template id="filter-button-template">
 
                             <button class="filter-button" data-filter="{{filter}}">

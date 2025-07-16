@@ -140,7 +140,7 @@ function startCsAnimation(elem, freq, max, min) {
     var time = Math.random() * period;
 
     let brightness = (((Math.cos(-time * freq * 2 * Math.PI) + 1) / 2) * (max - min)) + min;
-    elem.style.opacity = brightness
+    //elem.style.opacity = brightness
     setTimeout(() => {
         reset_animation(elem);
     }, time * 1000);
@@ -286,11 +286,11 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
 
-    //init interactive filters chips
-    var filtersWrapper = document.querySelector('.filters-wrapper');
+    //init interactive filters chips for projects
+    var projectfiltersWrapper = document.querySelector('#project-filters-wrapper');
     var filterChipTemplate = document.querySelector('#filter-button-template');
 
-    //creating filter chips
+    //creating filter chips for projects
     const filters = {'All':null, 'Web Full-Stack':['web','full-stack'],'Windows Desktop':['windows','dekstop'], 'Mobile and IoT':['mobile',"iot"], 'other':['cli-tools']};
    
     Object.keys(filters).forEach(filter => {
@@ -301,46 +301,54 @@ document.addEventListener('DOMContentLoaded', function () {
         if (filter.toLowerCase() === 'all') {
             button.classList.add('active');
         }
-        filtersWrapper.appendChild(chip);
+        projectfiltersWrapper.appendChild(chip);
     });
-    document.querySelectorAll('.filter-button').forEach(chip => {
+    projectfiltersWrapper.querySelectorAll('.filter-button').forEach(chip => {
         chip.addEventListener('click', () => {
-            chip.classList.toggle('active');
             const filter = chip.getAttribute('data-filter');
+            if(filter=="All"&&chip.classList.contains('active')) {
+                return;
+            }
+            chip.classList.toggle('active');
+            if(!chip.classList.contains('active')){
+                //if chip is deactivated, activated the "ALL" filter
+                projectfiltersWrapper.querySelector('.filter-button[data-filter="All"]').classList.add('active');
+            }
+
             //disabling UI state for non "all" filters
             if((filter=="All"||!allowMultipleFilters)&&chip.classList.contains('active')) {
-                 document.querySelectorAll('.filter-button').forEach(c => {
+                 projectfiltersWrapper.querySelectorAll('.filter-button').forEach(c => {
                     if(c===chip) return;
                     c.classList.remove('active');
                  })
             }
             //disabling all if needed
             if(filter!="All"&&chip.classList.contains('active')) {
-                document.querySelector('.filter-button[data-filter="All"]').classList.remove('active');
+                projectfiltersWrapper.querySelector('.filter-button[data-filter="All"]').classList.remove('active');
             }
             const items = document.querySelectorAll(`.project-item[data-filter="${filter}"]`);
             items.forEach(item => {
                 item.classList.toggle('hidden', !chip.classList.contains('active'));
             });
-            var enabledFilters = Array.from(document.querySelectorAll('.filter-button.active')).map(c => filters[c.getAttribute('data-filter')] );
+            var enabledFilters = Array.from(projectfiltersWrapper.querySelectorAll('.filter-button.active')).map(c => filters[c.getAttribute('data-filter')] );
             if (enabledFilters.length === 0 || enabledFilters.includes('All')) {
                 document.querySelectorAll('.project-item').forEach(item => {
                     item.classList.remove('hidden');
                 });
             }
             else {
-                console.log("enabled filters:", enabledFilters)
+                //console.log("enabled filters:", enabledFilters)
                 document.querySelectorAll('.project-item').forEach(item => {
                     const itemCetegories= item.getAttribute('data-categories')?.split(',') || [];
-                    console.log("item categories:", itemCetegories)
+                    //console.log("item categories:", itemCetegories)
                     var isVisible = enabledFilters.some(filter => {
                         if (!filter) return true; //if filter is null, show all items
-                        console.log("checking filter:", filter, "in", itemCetegories)
+                        //console.log("checking filter:", filter, "in", itemCetegories)
                         return itemCetegories.some(category => {
                             return filter.includes(category);
                         });
                     });
-                    console.log("isVisible:", isVisible, "for item:", item,"because", itemCetegories, "and filter:", enabledFilters, "filter:", filter)
+                    //console.log("isVisible:", isVisible, "for item:", item,"because", itemCetegories, "and filter:", enabledFilters, "filter:", filter)
                     item.classList.toggle('hidden', !isVisible);
 
                 });
@@ -349,9 +357,98 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         );
     });
+    //init interactive filters chips for skills
+    var skillsFiltersWrapper = document.querySelector('#skills-filters-wrapper');
+    var skillsFilterChipTemplate = document.querySelector('#filter-button-template');
+    //creating filter chips for skills
+    const skillsFilters = {'All':null, 'Front-end':['frontend'], 'Back-end':['backend'], 'Database':['database'], 'Tools':['tools'], 'Other':['desktop','design']};
+     Object.keys(skillsFilters).forEach(filter => {
+        const chip = filterChipTemplate.content.cloneNode(true);
+        const button = chip.querySelector('.filter-button');
+        button.setAttribute('data-filter', filter);
+        button.querySelector(".label"). textContent = filter;
+        if (filter.toLowerCase() === 'all') {
+            button.classList.add('active');
+        }
+        skillsFiltersWrapper.appendChild(chip);
+    });
+    skillsFiltersWrapper.querySelectorAll('.filter-button').forEach(chip => {
+        chip.addEventListener('click', () => {
+            
+            const filter = chip.getAttribute('data-filter');
+            if(filter=="All"&&chip.classList.contains('active')) {
+                return;
+            }
+            
+            chip.classList.toggle('active');
+            if(!chip.classList.contains('active')){
+                //if chip is deactivated, activated the "ALL" filter
+                skillsFiltersWrapper.querySelector('.filter-button[data-filter="All"]').classList.add('active');
+            }
+            //disabling UI state for non "all" filters
+            if((filter=="All"||!allowMultipleFilters)&&chip.classList.contains('active')) {
+                 skillsFiltersWrapper.querySelectorAll('.filter-button').forEach(c => {
+                    if(c===chip) return;
+                    c.classList.remove('active');
+                 })
+            }
+            //disabling all if needed
+            if(filter!="All"&&chip.classList.contains('active')) {
+                skillsFiltersWrapper.querySelector('.filter-button[data-filter="All"]').classList.remove('active');
+            }
+            
+            var enabledFilters = Array.from(skillsFiltersWrapper.querySelectorAll('.filter-button.active')).map(c => skillsFilters[c.getAttribute('data-filter')] );
+            if (enabledFilters.length === 0 || enabledFilters.includes('All')) {
+                document.querySelectorAll('.skill.framework').forEach(item => {
+                    item.classList.remove('hidden');
+                });
+                 document.querySelectorAll('.group-head').forEach(item => {
+                    item.classList.remove('hidden');
+                });
+            }
+            else {
+                //console.log("enabled filters:", enabledFilters)
+                document.querySelectorAll('.skill.framework, .group-head').forEach(item => {
+                    const itemCetegory= item.getAttribute('data-category')
+                    //console.log("item itemCetegory:", itemCetegory)
+                    var isVisible = enabledFilters.some(filter => {
+                        if (!filter) return true; //if filter is null, show all items
+                        //console.log("checking filter:", filter, "in", itemCetegory)
+                            return filter.includes(itemCetegory);
+                    });
+                    //console.log("isVisible:", isVisible, "for item:", item,"because", itemCetegory, "and filter:", enabledFilters, "filter:", filter)
+                    item.classList.toggle('hidden', !isVisible);
+
+                });
+            }
+
+        }
+        );
+    });
+    //end of init interactive filters chips for skills
+
+
 
     initDb();
+    //analytics
     notifyAction("PageLoaded", document.referrer,null)
+    document.querySelectorAll(".link").forEach(link => {
+        link.addEventListener("click", (ev) => {
+            var href = link.getAttribute("href");
+            if (href) {
+                notifyAction("LinkClick", href, null)
+            }
+        })
+    });
+    document.querySelectorAll("button").forEach(item => {
+        item.addEventListener("click", (ev) => {
+            var maybeFilter = item.getAttribute("data-filter");
+            var innerText = item.innerText;
+            if (maybeFilter ||innerText) {
+                notifyAction("BtnClick", innerText, maybeFilter)
+            }
+        })
+    });
 });
 function notifyAction(actionType, param1, param2) {
    var apiEndpoint = "https://api.yassinmi.com/action";
@@ -368,7 +465,7 @@ function notifyAction(actionType, param1, param2) {
         body: JSON.stringify(data)
     })
     .then(data => {
-        console.log('loaded-');
+        //console.log('-');
     })
     .catch((error) => {
         console.error('Error:', error);
