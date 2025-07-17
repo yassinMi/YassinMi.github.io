@@ -388,6 +388,7 @@ a.link:visited {
     /* height: 12px; */
     flex-basis: 10px;
     flex-grow: 1;
+    cursor: default;
 }
 
 .skill.language {
@@ -516,6 +517,7 @@ margin: var(--skill-framework-spacing-h) var(--skill-framework-spacing) ;
                                 box-sizing: border-box;
                                 background-color: #1b1b1b66;
                                 opacity: 0;
+                                    pointer-events: none;
 }
 .skill.framework:hover .progress-wrapper{
     opacity: 1;
@@ -551,6 +553,7 @@ margin: var(--skill-framework-spacing-h) var(--skill-framework-spacing) ;
                                 background-color: hsl(var(--chip-hue), 80%, 60%);
                                 border-radius: 0;
                                 transition: all 0.2s ease-in-out;
+                                pointer-events: none;
                             }
 
 .skill.framework>.id>span {
