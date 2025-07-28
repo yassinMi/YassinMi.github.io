@@ -581,7 +581,7 @@ margin: var(--skill-framework-spacing-h) var(--skill-framework-spacing) ;
 }
 .group-head{
         background-color: hsl(var(--category-hue), 60%, 40%);
-    width: 30px;
+    width: 24px;
     writing-mode: vertical-rl;
     text-orientation: mixed;
     font-size: 10px;

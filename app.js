@@ -451,6 +451,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 function notifyAction(actionType, param1, param2) {
+    if(window["_envirenment"]=="SSR-preview") {
+        console.log("notifyAction:", actionType, param1, param2)
+        return;
+    }
    var apiEndpoint = "https://api.yassinmi.com/action";
    var data = {
         actionType: actionType,
@@ -462,7 +466,8 @@ function notifyAction(actionType, param1, param2) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        credentials:"include"
     })
     .then(data => {
         //console.log('-');
