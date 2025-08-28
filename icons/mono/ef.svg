@@ -3,7 +3,7 @@
    viewBox="0 0 128 128"
    version="1.1"
    id="svg1"
-   sodipodi:docname="figma.svg"
+   sodipodi:docname="ef.svg"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -22,7 +22,7 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="6.0390625"
      inkscape:cx="63.917206"
-     inkscape:cy="63.834411"
+     inkscape:cy="64"
      inkscape:window-width="1920"
      inkscape:window-height="991"
      inkscape:window-x="-9"
@@ -30,7 +30,8 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="svg1" />
   <path
-     d="M45.5 129c11.9 0 21.5-9.6 21.5-21.5V86H45.5C33.6 86 24 95.6 24 107.5S33.6 129 45.5 129zm0 0M24 64.5C24 52.6 33.6 43 45.5 43H67v43H45.5C33.6 86 24 76.4 24 64.5zm0 0M24 21.5C24 9.6 33.6 0 45.5 0H67v43H45.5C33.6 43 24 33.4 24 21.5zm0 0M67 0h21.5C100.4 0 110 9.6 110 21.5S100.4 43 88.5 43H67zm0 0M110 64.5c0 11.9-9.6 21.5-21.5 21.5S67 76.4 67 64.5 76.6 43 88.5 43 110 52.6 110 64.5zm0 0"
+     fill="#512bd4"
+     d="M0 0v128h128V0H0zm41.602 47.37h18.837v4.595H47.063v9.031h12.535v4.574H47.063v10.444h13.376v4.617H41.602V47.369zm26.005 0H86.4v4.595H73.021V62.34h12.514v4.572H73.021v13.719h-5.414V47.369z"
      id="path1"
-     style="fill:#47eb47;fill-opacity:1" />
+     style="fill:#15f4b1;fill-opacity:1" />
 </svg>

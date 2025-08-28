@@ -317,9 +317,9 @@ a.link:visited {
     border-width: 1px;
     --chip-hue: 180;
     user-select: none;
-    background-color: hsla(var(--chip-hue), 74%, 53%, 0.173);
-    border-color: hsla(var(--chip-hue), 74%, 53%, 0.157);
-    color: hsla(var(--chip-hue), 87%, 70%, 0.698);
+    background-color: hsla(var(--chip-hue), var(--chip-sat, 74%), 53%, 0.173);
+    border-color: hsla(var(--chip-hue), var(--chip-sat, 74%), 53%, 0.157);
+    color: hsla(var(--chip-hue), var(--chip-sat, 87%), 70%, 0.698);
     /*background-color: hsla(var(--chip-hue), 74%, 53%, var(--glow-alpha-bg, 0.173));
     border-color: hsla(var(--chip-hue), 74%, 53%, var(--glow-alpha-border, 0.157));
     color: hsl(var(--chip-hue), 87%, 70%, var(--glow-alpha-fg, 0.698));*/
@@ -329,7 +329,7 @@ a.link:visited {
     align-content: center;
     font-weight: bold;
     transition: opacity 1s ease-in-out;
-    box-shadow: 0 0 var(--shadow-extent) hsla(var(--chip-hue), 74%, 53%, var(--aplha));
+    box-shadow: 0 0 var(--shadow-extent) hsla(var(--chip-hue), var(--chip-sat, 74%), 53%, var(--aplha));
     --aplha: 0.302;
     --shadow-extent: 0px;
     
@@ -342,9 +342,9 @@ a.link:visited {
 }
 
 .skill:hover {
-    background-color: hsla(var(--chip-hue), 74%, 53%, 0.337);
-    border-color: hsla(var(--chip-hue), 74%, 53%, 0.671);
-    color: hsl(var(--chip-hue), 87%, 70%);
+    background-color: hsla(var(--chip-hue), var(--chip-sat, 74%), 53%, 0.337);
+    border-color: hsla(var(--chip-hue), var(--chip-sat, 74%), 53%, 0.671);
+    color: hsl(var(--chip-hue), var(--chip-sat, 87%), 70%);
     transition: opacity 1s ease-in-out;
     --aplha: 0.302;
     --shadow-extent: 11px;
@@ -372,6 +372,10 @@ a.link:visited {
     --min-sin-bringhtness: 0.6;
 }
 
+.skill img{
+    display: none;
+}
+
 .skill.icon{
   
 }
@@ -389,6 +393,7 @@ a.link:visited {
     flex-basis: 10px;
     flex-grow: 1;
     cursor: default;
+    display: block;
 }
 
 .skill.language {
@@ -470,10 +475,14 @@ margin: var(--skill-framework-spacing-h) var(--skill-framework-spacing) ;
     --category-hue: 30;
 }
 
-/* Design – pink */
+/* Design – gray */
 .skill.framework[data-category="design"],
 .group-head[data-category="design"] {
     --category-hue: 330;
+    --category-sat: 330;
+    --category-grp-head-sat: 0%;
+    --category-grp-head-border-sat: 0%;
+    --chip-sat: 0%;
 }
 
 .skill.framework .id{
@@ -536,7 +545,7 @@ margin: var(--skill-framework-spacing-h) var(--skill-framework-spacing) ;
 
                             .progress-inner {
                                 height: 100%;
-                                background-color: hsl( var(--chip-hue) , 80%, 80%);
+                                background-color: hsl( var(--chip-hue) , var(--chip-sat, 80%), 80%);
                             }
                             .progress-wrapper span {
                                 font-size: 8px;
@@ -550,7 +559,7 @@ margin: var(--skill-framework-spacing-h) var(--skill-framework-spacing) ;
                                 height: var(--group-underline-width);
                                 bottom: -6px;
                                 left: calc(-2 *  var(--skill-framework-spacing) - var(--skill-framework-border-width));
-                                background-color: hsl(var(--chip-hue), 80%, 60%);
+                                background-color: hsl(var(--chip-hue), var(--chip-sat, 80%), 60%);
                                 border-radius: 0;
                                 transition: all 0.2s ease-in-out;
                                 pointer-events: none;
@@ -580,7 +589,7 @@ margin: var(--skill-framework-spacing-h) var(--skill-framework-spacing) ;
     display: flex;
 }
 .group-head{
-        background-color: hsl(var(--category-hue), 60%, 40%);
+        background-color: hsl(var(--category-hue), var(--category-grp-head-sat, 60%) , 40%);
     width: 24px;
     writing-mode: vertical-rl;
     text-orientation: mixed;
@@ -592,7 +601,7 @@ margin: var(--skill-framework-spacing-h) var(--skill-framework-spacing) ;
     justify-content: center;
     border-radius: var(--skill-framework-radius);
     height: var(--skill-framework-size);
-    border: var(--skill-framework-border-width) solid hsl(var(--category-hue), 80%, 60%);
+    border: var(--skill-framework-border-width) solid hsl(var(--category-hue),  var(--category-grp-head-border-sat, 80%) , 60%);
     box-sizing: content-box;
     position: relative;
     margin: var(--skill-framework-spacing-h) var(--skill-framework-spacing) var(--skill-framework-spacing-h) 0;
@@ -617,7 +626,7 @@ margin: var(--skill-framework-spacing-h) var(--skill-framework-spacing) ;
                                 height: var(--group-underline-width);
                                 bottom: -6px;
                                 left: calc(-1 * var(--skill-framework-border-width));
-                                background-color: hsl(var(--category-hue), 80%, 60%);
+                                background-color: hsl(var(--category-hue), var(--category-grp-head-border-sat, 80%), 60%);
                                 border-radius: 0;
                                 transition: all 0.2s ease-in-out;
                             }
